@@ -1,0 +1,79 @@
+name: Options Command Center — Auto Update
+# CT = CST (UTC-6) | UTC = CT + 6
+# 12 runs/day matching proven trading windows
+on:
+  schedule:
+    - cron: '50 13 * * 1-5'   #  7:50 AM CT  pre-market
+    - cron: '30 14 * * 1-5'   #  8:30 AM CT  open watch
+    - cron: '35 14 * * 1-5'   #  8:35 AM CT  open confirm
+    - cron: '45 14 * * 1-5'   #  8:45 AM CT  follow-through
+    - cron: '0  15 * * 1-5'   #  9:00 AM CT  continuation
+    - cron: '20 15 * * 1-5'   #  9:20 AM CT  continuation
+    - cron: '30 16 * * 1-5'   # 10:30 AM CT  dead zone monitor
+    - cron: '15 18 * * 1-5'   # 12:15 PM CT  midday
+    - cron: '0  19 * * 1-5'   #  1:00 PM CT  POWER WINDOW
+    - cron: '30 19 * * 1-5'   #  1:30 PM CT  POWER WINDOW
+    - cron: '0  20 * * 1-5'   #  2:00 PM CT  POWER WINDOW
+    - cron: '30 20 * * 1-5'   #  2:30 PM CT  POWER WINDOW close
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-dashboard-v6
+
+      - name: Install dependencies
+        run: pip install --quiet yfinance feedparser numpy pytz
+
+      - name: Run dashboard updater (with retry)
+        run: |
+          for attempt in 1 2 3; do
+            echo "▶ Attempt $attempt of 3..."
+            if python update_dashboard.py; then
+              echo "✅ Success on attempt $attempt"
+              exit 0
+            fi
+            if [ $attempt -lt 3 ]; then
+              echo "⚠️  Failed. Waiting 30s before retry..."
+              sleep 30
+            fi
+          done
+          echo "❌ All 3 attempts failed."
+          exit 1
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet && echo "No changes to commit." && exit 0
+          git commit -m "📊 Dashboard — $(TZ='America/Chicago' date '+%I:%M %p CT, %b %d')"
+          git push
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: update-dashboard
+    if: failure()
+    timeout-minutes: 2
+    steps:
+      - name: Log failure
+        run: |
+          echo "❌ DASHBOARD FAILED at $(TZ='America/Chicago' date '+%I:%M %p CT')"
+          echo "🔗 ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
