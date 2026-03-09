@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>NVDA · OCC v6</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06090f;--s1:#0b1420;--s2:#0f1a2e;--bd:#192e4a;
+  --green:#00ff9d;--green-dim:#00c87a;--red:#ff3a5e;--yellow:#ffd700;
+  --orange:#ff8c42;--blue:#4fc3f7;--white:#e8f4ff;--muted:#4a6888;--text:#b0c8e4;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;
+  background-image:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(0,70,160,.09) 0%,transparent 65%)}
+.hdr{border-bottom:1px solid var(--bd);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(6,9,15,.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}
+.main{max-width:1440px;margin:0 auto;padding:6px 8px;display:flex;flex-direction:column;gap:5px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;align-items:start}
+.card{background:var(--s1);border:1px solid var(--bd);padding:7px 9px}
+.ct{font-size:.56rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:3px}
+.ct::before{content:'';width:3px;height:3px;background:var(--blue);display:block;border-radius:50%;flex-shrink:0}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{padding:3px 3px;font-size:.64rem;border-bottom:1px solid rgba(25,46,74,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+th{color:var(--muted);font-size:.55rem;letter-spacing:.5px;text-align:left}
+tr:last-child td{border-bottom:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.dot{width:5px;height:5px;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
+@media(max-width:1100px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.g4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap">
+    <span style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--white);letter-spacing:3px">NVDA</span>
+    <span style="font-size:1.1rem;color:#00ff9d;font-weight:700">$179.05</span>
+    <span style="font-size:.78rem;color:#00ff9d">▲ +1.17 (+0.65%)</span>
+    <span style="font-size:.58rem;color:var(--muted)">H182.76·L175.56·ATR$5.95</span>
+    <span style="font-size:.55rem;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.3);color:#4fc3f7;padding:2px 6px;font-weight:700">v6 PROVEN</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+    <span style="font-size:.66rem;color:#ff3a5e;font-weight:700">🔴 BELOW $180 BEAR</span>
+    <span style="font-size:.64rem;color:#ffd700"><span class="dot" style="background:#ffd700;margin-right:2px"></span>📈 CONTINUATION</span>
+    <span style="color:#ff3a5e;font-size:.62rem;font-weight:700">SPY BEAR✗</span>
+    <span style="font-size:.6rem;color:var(--muted)">Mar 09·09:49 AM CT</span>
+  </div>
+</header>
+
+<div class="main">
+<div style="background:rgba(255,215,0,.1);border:1px solid #ffd700;padding:5px 14px;font-size:.68rem;color:#ffd700;font-weight:700;text-align:center">⚡ ON LEVEL: $180.34 — CRITICAL PIVOT (DY)</div>
+
+<!-- SESSION BAR -->
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px"><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">07:00</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🌅 PRE-MKT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">08:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">⚠️ FAKE-OUT</div></div><div style="background:#ffd70020;border:1px solid #ffd70099;padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">09:15</div><div style="font-size:.6rem;font-weight:700;color:#ffd700;white-space:nowrap">📈 CONTINUATION</div><div style="font-size:.5rem;color:#ffd700">●NOW</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">10:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">💤 DEAD ZONE</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">13:00</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🏆 POWER WINDOW</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">14:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🔔 CLOSING PUSH</div></div></div>
+
+<!-- VERDICT -->
+<div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid #ffd700;background:linear-gradient(135deg,rgba(11,20,32,.97),rgba(15,26,46,.97));display:grid;grid-template-columns:1fr 140px;gap:10px;align-items:center">
+  <div>
+    <div style="font-size:.53rem;color:var(--muted);letter-spacing:1px;margin-bottom:2px">VERDICT · 09:49 AM CT</div>
+    <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#ffd700;line-height:1.2">⏸ PUT WATCH (1/4)</div>
+    <div style="font-size:.66rem;color:var(--text);margin-top:3px;line-height:1.45">1 bear signal. Need 2+.</div>
+    <div style="margin-top:4px;padding:5px 7px;background:rgba(255,255,255,.025);border-left:2px solid #ffd700;font-size:.68rem;color:var(--white)">A: PUT active. Target $175 weekly. Stop above $180.34. | B: Bounce to $180.34 fails → add puts.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="border:1px solid #ffd700;color:#ffd700;padding:4px 8px;font-size:.7rem;letter-spacing:1px;font-weight:700;text-align:center">DEVELOPING</div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:.55rem;margin-bottom:2px"><span style="color:var(--muted)">CALL</span><span style="color:#00ff9d;font-weight:700">0/4</span></div>
+      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0%;background:linear-gradient(90deg,#00c87a,#00ff9d);border-radius:2px"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:.55rem;margin-bottom:2px"><span style="color:var(--muted)">PUT</span><span style="color:#ff3a5e;font-weight:700">1/4</span></div>
+      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:25%;background:linear-gradient(90deg,#cc1f40,#ff3a5e);border-radius:2px"></div></div>
+    </div>
+    <div style="font-size:.54rem;color:var(--muted);text-align:center;border-top:1px solid var(--bd);padding-top:3px">IV46.5%·DTE32·±$24.65</div>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="g4">
+
+  <!-- COL 1: Signals + Divergence -->
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font-size:.55rem;color:var(--muted);letter-spacing:1.5px;padding:2px 0">PROVEN SIGNALS</div>
+    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.35);padding:6px 7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span style="font-size:.56rem;color:#b39ddb;font-weight:700">S1 ICHIMOKU</span>
+            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">15M PF4.18</span>
+          </div>
+          <div style="font-size:.73rem;font-weight:700;color:#5a7a99">⏸ IN CLOUD</div>
+          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">$178.2–$179.8</div>
+        </div>
+    <div style="background:rgba(255,58,94,.06);border:1px solid rgba(255,58,94,.35);padding:6px 7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span style="font-size:.56rem;color:#7c4dff;font-weight:700">S2 KAUFMAN</span>
+            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">4H PF4.34</span>
+          </div>
+          <div style="font-size:.73rem;font-weight:700;color:#ff3a5e">✅ BEAR</div>
+          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">HLC3<185.0·KAMA↓·ER0.12</div>
+        </div>
+    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.35);padding:6px 7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span style="font-size:.56rem;color:#4fc3f7;font-weight:700">S3 RSI</span>
+            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">1H 77%WR</span>
+          </div>
+          <div style="font-size:.73rem;font-weight:700;color:#5a7a99">⏸ MID</div>
+          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">RSI39 wait 45/55</div>
+        </div>
+    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.35);padding:6px 7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+            <span style="font-size:.56rem;color:#ff8c42;font-weight:700">S4 MACD+RSI</span>
+            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">1H 68%WR</span>
+          </div>
+          <div style="font-size:.73rem;font-weight:700;color:#5a7a99">⏸ WAIT</div>
+          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">MACD-0.296·RSI39</div>
+        </div>
+    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.3);padding:6px 7px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+        <span style="font-size:.55rem;color:var(--muted);letter-spacing:.5px">DIV BONUS</span><span style="color:var(--muted);font-size:.58rem">No action</span>
+      </div>
+      <div style="font-size:.7rem;font-weight:700;color:#5a7a99">No divergence</div>
+      <div style="font-size:.58rem;color:var(--text);margin-top:1px">No divergence on 1H</div>
+    </div>
+  </div>
+
+  <!-- COL 2: Brando + Scenario -->
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div class="card" style="padding:7px">
+      <div class="ct">Brando S/R</div>
+      <table style="table-layout:fixed">
+        <colgroup><col style="width:20px"><col style="width:38px"><col><col style="width:32px"></colgroup>
+        <tr><th>TF</th><th>$</th><th>LABEL</th><th style="text-align:right">DIST</th></tr>
+        <tr style="background:rgba(255,215,0,.04);"><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$180</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★CRITICAL PIVOT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+1.3</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$185</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★KEY RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+5.5</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ff6b6b;font-weight:700;font-size:.65rem">$190</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+11.3</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#b39ddb;font-size:.56rem">MO</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$191</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★YELLOW LINE $191</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+11.9</td></tr><tr style="background:rgba(255,215,0,.09)"><td colspan="2" style="color:#ffd700;font-weight:700;font-size:.7rem">▶$179.05</td><td colspan="2" style="color:#ffd700;font-size:.55rem;text-align:right">⚡CRITICAL P</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$175</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-3.9</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#7c4dff;font-size:.56rem">WK</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$175</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★CRITICAL SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-4.0</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$169</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-10.4</td></tr><tr style=""><td style="color:#b39ddb;font-size:.56rem">MO</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$168</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-11.1</td></tr>
+      </table>
+    </div>
+    <div class="card" style="padding:7px">
+      <div class="ct">Scenario</div>
+      <div style="background:#ff3a5e10;border:1px solid #ff3a5e55;padding:5px;margin-bottom:5px">
+        <div style="font-size:.73rem;font-weight:700;color:#ff3a5e">🔴 BELOW $180 BEAR</div>
+        <div style="font-size:.55rem;color:var(--muted);margin-top:2px">R <strong style="color:#ff6b6b">$180.34</strong>+1.3 · S <strong style="color:#00ff9d">$175.00</strong>-4.1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:4px">
+        <div style="background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.22);padding:4px">
+          <div style="font-size:.52rem;color:#00ff9d;font-weight:700;margin-bottom:2px">A BULL</div>
+          <div style="font-size:.6rem;color:var(--text);line-height:1.35">PUT active. Target $175 weekly. Stop above $180.34.</div>
+        </div>
+        <div style="background:rgba(255,58,94,.04);border:1px solid rgba(255,58,94,.22);padding:4px">
+          <div style="font-size:.52rem;color:#ff3a5e;font-weight:700;margin-bottom:2px">B BEAR</div>
+          <div style="font-size:.6rem;color:var(--text);line-height:1.35">Bounce to $180.34 fails → add puts.</div>
+        </div>
+      </div>
+      <div style="font-size:.6rem;line-height:1.6;background:rgba(0,0,0,.15);padding:4px;border:1px solid var(--bd)">
+        ❌ <strong style="color:#ffd700">$191</strong>
+        ❌ <strong style="color:#4fc3f7">$184</strong>
+        ❌ <strong style="color:#ff8c42">$180★</strong>
+        ✅ <strong style="color:#7c4dff">$175</strong>
+        ✅ <strong style="color:#b39ddb">$153</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- COL 3: Call + Put -->
+  <div style="display:grid;grid-template-rows:auto auto;gap:4px">
+    <div class="card" style="padding:7px">
+      <div class="ct">Call (0/4)</div>
+      <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:.58rem;color:var(--muted);margin-bottom:2px"><span>SIGNALS</span><span style="color:#00ff9d;font-weight:700">0/4</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0%;background:#00ff9d;border-radius:2px"></div></div></div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S1 ICHI: $178.2–$179.8</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S2 KAMA: HLC3<185.0·KAMA↓·ER0.12</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S3 RSI: RSI39 wait 45/55</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S4 MACD: MACD-0.296·RSI39</div><div style="font-size:.54rem;color:var(--muted);letter-spacing:.5px;margin:5px 0 2px">CONTEXT</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ Below $180.34 — vs Brando</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ SPY headwind</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ Vol 0.29x neutral</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ CONTINUATION</div>
+      <div style="font-size:.63rem;color:var(--muted);padding:6px;text-align:center">No ATM $3–6 option</div>
+    </div>
+    <div class="card" style="padding:7px">
+      <div class="ct">Put (1/4)</div>
+      <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:.58rem;color:var(--muted);margin-bottom:2px"><span>SIGNALS</span><span style="color:#ff3a5e;font-weight:700">1/4</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:25%;background:#ff3a5e;border-radius:2px"></div></div></div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S1 ICHI: $178.2–$179.8</div><div style="font-size:.62rem;color:#00ff9d;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">✅ S2 KAMA: HLC3<185.0·KAMA↓·ER0.12</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S3 RSI: RSI39 wait 45/55</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S4 MACD: MACD-0.296·RSI39</div><div style="font-size:.54rem;color:var(--muted);letter-spacing:.5px;margin:5px 0 2px">CONTEXT</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ Below $180.34 bias</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ SPY tailwind</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ Vol 0.29x neutral</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ CONTINUATION</div>
+      <div style="background:rgba(255,255,255,.02);border:1px solid #ff3a5e44;padding:6px;margin-top:5px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3px;text-align:center;margin-bottom:4px">
+            <div><div style="font-size:.52rem;color:var(--muted)">ENTRY</div><div style="font-size:.76rem;color:var(--white);font-weight:700">$5.43</div></div>
+            <div><div style="font-size:.52rem;color:var(--muted)">STOP</div><div style="font-size:.76rem;color:var(--red);font-weight:700">$3.53</div></div>
+            <div><div style="font-size:.52rem;color:var(--muted)">TARGET</div><div style="font-size:.76rem;color:var(--green);font-weight:700">$8.69</div></div>
+            <div><div style="font-size:.52rem;color:var(--muted)">R:R</div><div style="font-size:.76rem;font-weight:700;color:#ffd700">1.7:1</div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted)">
+            <span>$500·1ct</span><span style="color:var(--red)">max $190</span>
+          </div></div>
+    </div>
+  </div>
+
+  <!-- COL 4: Chain + News -->
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div class="card" style="padding:7px">
+      <div class="ct">Chain 2026-04-10 (32d) IV46.5%</div>
+      <div style="font-size:.55rem;color:var(--orange);letter-spacing:1px;margin-bottom:2px">CALLS</div>
+      <table style="table-layout:fixed">
+        <colgroup><col style="width:36px"><col style="width:34px"><col style="width:28px"><col style="width:28px"><col></colgroup>
+        <tr><th>STR</th><th>$</th><th>IV</th><th>SPR</th><th>VOL</th></tr>
+        <tr><td style="font-size:.6rem;color:var(--muted)">$155</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$25.74</td><td style="color:var(--orange);font-size:.6rem">53.7%</td><td style="color:#ff3a5e;font-size:.6rem">$0.50</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$160</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$22.08</td><td style="color:var(--orange);font-size:.6rem">50.5%</td><td style="color:#ffd700;font-size:.6rem">$0.20</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$165</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$18.02</td><td style="color:var(--orange);font-size:.6rem">49.5%</td><td style="color:#ffd700;font-size:.6rem">$0.20</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$170</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$14.46</td><td style="color:var(--orange);font-size:.6rem">48.3%</td><td style="color:#00ff9d;font-size:.6rem">$0.15</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$175</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$11.80</td><td style="color:var(--orange);font-size:.6rem">46.5%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr style="background:rgba(255,215,0,.05)"><td style="font-size:.6rem;color:var(--muted)">$180</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$8.97</td><td style="color:var(--orange);font-size:.6rem">44.8%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$185</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$6.60</td><td style="color:var(--orange);font-size:.6rem">43.3%</td><td style="color:#00ff9d;font-size:.6rem">$0.05</td><td style="color:var(--green-dim);font-size:.56rem">4K</td></tr>
+      </table>
+      <div style="font-size:.55rem;color:var(--red);letter-spacing:1px;margin:4px 0 2px">PUTS</div>
+      <table style="table-layout:fixed">
+        <colgroup><col style="width:36px"><col style="width:34px"><col style="width:28px"><col style="width:28px"><col></colgroup>
+        <tr><th>STR</th><th>$</th><th>IV</th><th>SPR</th><th>VOL</th></tr>
+        <tr style="background:rgba(255,215,0,.05)"><td style="font-size:.6rem;color:var(--muted)">$180</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$10.90</td><td style="color:var(--orange);font-size:.6rem">47.7%</td><td style="color:#00ff9d;font-size:.6rem">$0.15</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$175</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$8.95</td><td style="color:var(--orange);font-size:.6rem">49.9%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$170</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$7.23</td><td style="color:var(--orange);font-size:.6rem">51.2%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$165🎯</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$5.43</td><td style="color:var(--orange);font-size:.6rem">53.2%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr>
+      </table>
+      <div style="margin-top:4px;font-size:.54rem;color:var(--muted)">🎯$3.5–6.5·V>500·OI>1K·Spr&lt;.20</div>
+    </div>
+    <div class="card" style="padding:7px">
+      <div class="ct">News</div>
+      <div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#00ff9d;font-weight:700;margin-right:3px">▲</span><a href="https://247wallst.com/investing/2026/03/09/the-dividend-etf-that-survived-the-2008-and-2020-panics-is-still-paying-monthly-income-in-2026/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">The Dividend ETF That Survived The 2008 and 2020 Panics Is Still Paying Monthly Income in 2026</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:40</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://www.fool.com/investing/2026/03/09/jpmorgan-ceo-too-much-exuberance-in-stocks-should/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">JPMorgan CEO: "Too Much Exuberance" in Stocks -- Should Investors Beware?</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:35</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://finance.yahoo.com/news/bc-most-active-stocks-143028126.html?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">BC-Most Active Stocks</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:30</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#00ff9d;font-weight:700;margin-right:3px">▲</span><a href="https://www.fool.com/investing/2026/03/09/3-surprising-stocks-that-hit-fresh-highs-last-week/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">3 Surprising Stocks That Hit Fresh Highs Last Week</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:27</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://finance.yahoo.com/m/c2181af4-fc06-3732-85cc-f993cb134023/nvidia-slips-amid-energy.html?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">Nvidia Slips Amid Energy Shock, GTC Ahead; Is Nvidia A Buy Or Sell Now?</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:23</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://www.fool.com/investing/2026/03/09/forget-ai-stocks-this-potentially-disruptive-biote/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">Forget AI Stocks: This Potentially Disruptive Biotech Could Soar By 181%, According to Wall Street</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Mon, 09 Mar 2026 14:20</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM GRID -->
+<div class="g4">
+
+  <div class="card" style="padding:7px">
+    <div class="ct">MTF Bias</div>
+    <table>
+      <tr><th>TF</th><th>TREND</th><th>RSI</th><th>MACD</th><th>BIAS</th><th>VOL</th></tr>
+      <tr><td style="color:var(--white);font-weight:700;font-size:.62rem">DAILY</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ffd700;font-size:.62rem">43.7</td><td style="color:#ff3a5e;font-size:.62rem">↓-1.02</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.28x</td></tr><tr><td style="color:var(--white);font-weight:700;font-size:.62rem">4H</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ffd700;font-size:.62rem">40.9</td><td style="color:#ff3a5e;font-size:.62rem">↓-0.48</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.66x</td></tr><tr><td style="color:var(--white);font-weight:700;font-size:.62rem">1H</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ff3a5e;font-size:.62rem">39.0</td><td style="color:#ff3a5e;font-size:.62rem">↓-0.30</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.35x</td></tr>
+    </table>
+    <div style="margin-top:4px;padding:4px;background:rgba(0,0,0,.15);border:1px solid var(--bd);font-size:.56rem;color:var(--muted)"><strong style="color:var(--yellow)">Size:</strong> 2=$500·3=$750·4=$1000</div>
+  </div>
+
+  <div class="card" style="padding:7px">
+    <div class="ct">Regime</div>
+    <div style="background:rgba(0,0,0,.2);border:1px solid #ff3a5e55;padding:5px;margin-bottom:5px">
+      <div style="font-size:.7rem;font-weight:700;color:#ff3a5e">SPY BEAR✗</div>
+      <div style="font-size:.56rem;color:var(--muted)">$667.33 vs 50EMA $684.28</div>
+    </div>
+    <div style="margin-bottom:4px"><div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:2px"><span>Compression</span><span style="color:#5a7a99;font-weight:700">0.0/100</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0.0%;background:#5a7a99;border-radius:2px"></div></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:3px"><span>ATR(14)</span><span style="color:var(--orange);font-weight:700">$5.95</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:2px"><span>Volume</span><span style="font-weight:700;color:#ff3a5e">0.29x·51M</span></div>
+    <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:14%;background:#ff3a5e;border-radius:2px"></div></div>
+    <div style="margin-top:5px;border-top:1px solid var(--bd);padding-top:4px"><div style="font-size:.55rem;color:var(--muted);margin-bottom:2px">1H EMA</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;font-size:.6rem">
+      <div>E8 <strong style="color:var(--blue)">$179.35</strong></div>
+      <div>E21 <strong style="color:var(--blue)">$180.54</strong></div>
+      <div>E50 <strong style="color:var(--blue)">$182.33</strong></div>
+      <div>RSI <strong style="color:var(--blue)">39.0</strong></div>
+    </div></div>
+  </div>
+
+  <div class="card" style="padding:7px">
+    <div class="ct">5m Candles</div>
+    <table>
+      <tr><th>TIME</th><th>$</th><th></th><th>H</th><th>L</th><th>VOL</th></tr>
+      <tr><td style="color:var(--muted);font-size:.58rem">09:10 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$176.95</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">177.1</td><td style="color:var(--muted);font-size:.58rem">176.2</td><td style="color:var(--green-dim);font-size:.56rem">2369K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:15 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$177.71</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">177.8</td><td style="color:var(--muted);font-size:.58rem">176.8</td><td style="color:var(--green-dim);font-size:.56rem">2402K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:20 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$178.24</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">178.3</td><td style="color:var(--muted);font-size:.58rem">177.3</td><td style="color:var(--green-dim);font-size:.56rem">2726K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:25 AM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$178.11</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">178.5</td><td style="color:var(--muted);font-size:.58rem">177.8</td><td style="color:var(--green-dim);font-size:.56rem">2815K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:30 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$178.21</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">178.4</td><td style="color:var(--muted);font-size:.58rem">178.0</td><td style="color:var(--green-dim);font-size:.56rem">2219K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:35 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$178.68</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">178.9</td><td style="color:var(--muted);font-size:.58rem">178.1</td><td style="color:var(--green-dim);font-size:.56rem">2189K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:40 AM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$179.06</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">179.1</td><td style="color:var(--muted);font-size:.58rem">178.6</td><td style="color:var(--green-dim);font-size:.56rem">2015K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">09:45 AM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$179.02</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">179.3</td><td style="color:var(--muted);font-size:.58rem">178.9</td><td style="color:var(--green-dim);font-size:.56rem">1545K</td></tr>
+    </table>
+    <div style="margin-top:5px;border-top:1px solid var(--bd);padding-top:4px">
+      <div style="font-size:.55rem;color:var(--muted);margin-bottom:2px">52W (74th pct)</div>
+      <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted);margin-bottom:2px"><span>$87</span><span style="color:var(--white)">$179.05</span><span>$212</span></div>
+      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:74%;background:var(--blue);border-radius:2px"></div></div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:7px">
+    <div class="ct">v6 Entry Rules</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:5px">
+      <div style="background:rgba(179,157,219,.08);border:1px solid rgba(179,157,219,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#b39ddb">ICHIMOKU</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">PF 4.18</div></div>
+      <div style="background:rgba(124,77,255,.08);border:1px solid rgba(124,77,255,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#7c4dff">KAUFMAN</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">PF 4.34</div></div>
+      <div style="background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#4fc3f7">RSI</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">77%WR</div></div>
+    </div>
+    <div style="font-size:.6rem;line-height:1.6;color:var(--text)">
+      <span style="color:var(--green)">ENTRY:</span> 2+sigs·Brando·SPY·vol·Power Win<br>
+      <span style="color:var(--yellow)">SIZE:</span> 2=$500·3=$750·4=$1000
+    </div>
+    <div style="margin-top:4px;padding:4px 6px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.3);font-size:.58rem;color:var(--orange);line-height:1.5">EXIT +60%→SELL·-35%→STOP·Day3→OUT·MACD→HALF</div>
+    <div style="margin-top:3px;padding:4px 6px;background:rgba(255,58,94,.05);border:1px solid rgba(255,58,94,.2);font-size:.58rem;color:var(--red);line-height:1.5">NEVER: midday 10:30–1PM·chasing·ignoring vol</div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:5px;font-size:.54rem;color:var(--muted);border-top:1px solid var(--bd)">
+  v6·Ichimoku PF4.18·Kaufman PF4.34·RSI 77%WR·@EliteOptions2·⚠️Educational only·Updated <strong style="color:var(--text)">2026-03-09 09:49 CT</strong>
+</div>
+</div>
+</body></html>
