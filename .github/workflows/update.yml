@@ -1,23 +1,26 @@
-name: Update SPY Dashboard
+name: Update Dashboard
 
 on:
   schedule:
-    # Pre-market scan (8:55 AM CT = 13:55 UTC)
-    - cron: '55 13 * * 1-5'
-    # ORB window — every 5 min (9:45–10:30 AM CT = 14:45–15:30 UTC)
-    - cron: '45 14 * * 1-5'
-    - cron: '50 14 * * 1-5'
-    - cron: '55 14 * * 1-5'
-    - cron: '0 15 * * 1-5'
-    - cron: '5 15 * * 1-5'
-    - cron: '10 15 * * 1-5'
-    - cron: '15 15 * * 1-5'
-    - cron: '20 15 * * 1-5'
-    - cron: '25 15 * * 1-5'
-    - cron: '30 15 * * 1-5'
-    # Post-cutoff (10:35 AM CT = 15:35 UTC) — final state
-    - cron: '35 15 * * 1-5'
+    # ── Morning window: 8:55–10:25 AM CT (7 runs, every 15 min) ────────────────
+    # CT = CDT (UTC-5) during daylight saving (Mar–Nov)
+    - cron: '55 13 * * 1-5'   # 08:55 CT
+    - cron: '10 14 * * 1-5'   # 09:10 CT
+    - cron: '25 14 * * 1-5'   # 09:25 CT
+    - cron: '40 14 * * 1-5'   # 09:40 CT
+    - cron: '55 14 * * 1-5'   # 09:55 CT
+    - cron: '10 15 * * 1-5'   # 10:10 CT
+    - cron: '25 15 * * 1-5'   # 10:25 CT
+    # ── Midday / afternoon checks ───────────────────────────────────────────────
+    - cron: '0 16 * * 1-5'    # 11:00 CT
+    - cron: '0 18 * * 1-5'    # 13:00 CT (1 PM)
+    - cron: '0 19 * * 1-5'    # 14:00 CT (2 PM)
+    - cron: '0 20 * * 1-5'    # 15:00 CT (3 PM)
   workflow_dispatch:
+
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -25,7 +28,8 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
+
     steps:
       - uses: actions/checkout@v4
 
@@ -33,23 +37,28 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: pip-
+
       - name: Install deps
-        run: pip install yfinance feedparser numpy pytz
+        run: pip install -q -r requirements.txt
 
       - name: Run updater
         run: |
-          for i in 1 2 3; do
-            echo "Attempt $i"
-            python update_dashboard.py && exit 0
-            sleep 30
+          for i in 1 2; do
+            python update_dashboard.py && break
+            [ $i -lt 2 ] && sleep 15
           done
-          exit 1
 
-      - name: Push
+      - name: Commit & push
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "spy update $(date -u +%H:%M)"
+          git diff --staged --quiet && exit 0
+          git commit -m "upd $(date -u +%H:%M)"
           git push
