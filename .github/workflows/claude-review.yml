@@ -1,0 +1,27 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize] # Triggers when a PR is opened or updated
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Set permissions to least privilege
+      pull-requests: write # Required for Claude to post review comments
+      issues: read # Allows Claude to read issue context
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4 # Action to check out your code
+      with:
+        fetch-depth: 0 # Fetch all history for better context if needed
+
+    - name: Run Claude Code Action
+      uses: anthropics/claude-code-action@v1 # The official Claude Action
+      with:
+        anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }} # Reference the secret
+        prompt: |
+          Review this PR for bugs, security issues, and code quality.
+          Be specific and actionable in your feedback. # Your instructions for Claude
