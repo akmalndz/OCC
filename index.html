@@ -1,284 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="300">
-<title>NVDA · OCC v6</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SPY · OCC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#06090f;--s1:#0b1420;--s2:#0f1a2e;--bd:#192e4a;
-  --green:#00ff9d;--green-dim:#00c87a;--red:#ff3a5e;--yellow:#ffd700;
-  --orange:#ff8c42;--blue:#4fc3f7;--white:#e8f4ff;--muted:#4a6888;--text:#b0c8e4;}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;
-  background-image:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(0,70,160,.09) 0%,transparent 65%)}
-.hdr{border-bottom:1px solid var(--bd);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(6,9,15,.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}
-.main{max-width:1440px;margin:0 auto;padding:6px 8px;display:flex;flex-direction:column;gap:5px}
-.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;align-items:start}
-.card{background:var(--s1);border:1px solid var(--bd);padding:7px 9px}
-.ct{font-size:.56rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:3px}
-.ct::before{content:'';width:3px;height:3px;background:var(--blue);display:block;border-radius:50%;flex-shrink:0}
-table{width:100%;border-collapse:collapse;table-layout:fixed}
-th,td{padding:3px 3px;font-size:.64rem;border-bottom:1px solid rgba(25,46,74,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-th{color:var(--muted);font-size:.55rem;letter-spacing:.5px;text-align:left}
-tr:last-child td{border-bottom:none}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.dot{width:5px;height:5px;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
-@media(max-width:1100px){.g4{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.g4{grid-template-columns:1fr}}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;--card:#13161f;--bd:#1c2030;--bdl:#222840;
+  --tx:#8892a4;--txm:#4a5568;--txd:#2a3245;
+  --up:#4ade80;--dn:#f87171;--am:#fbbf24;--bl:#60a5fa;--pu:#a78bfa;--wh:#dde3ef;
+  --font:'IBM Plex Mono','Courier New',monospace;
+}
+html,body{background:var(--bg);color:var(--tx);font-family:var(--font);font-size:12px;min-height:100vh}
+body{padding:11px 13px}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.grid3{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:9px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:5px;padding:10px 12px;margin-bottom:8px}
+.lbl{font-size:9px;color:var(--txd);letter-spacing:2px;margin-bottom:6px;display:block;text-transform:uppercase}
+.row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--bd)}
+.f7{font-size:7px}.f8{font-size:8px}.f9{font-size:9px}.f10{font-size:10px}.f11{font-size:11px}.f12{font-size:12px}
+.up{color:var(--up)}.dn{color:var(--dn)}.am{color:var(--am)}.bl{color:var(--bl)}.pu{color:var(--pu)}.wh{color:var(--wh)}
+.txm{color:var(--txm)}.txd{color:var(--txd)}
+.b5{font-weight:500}.b6{font-weight:600}
+a{color:var(--bl);text-decoration:none}a:hover{opacity:.75}
+#hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--bd)}
+.dot{width:5px;height:5px;border-radius:50%;animation:blink 2s infinite;display:inline-block;margin:0 4px}
+.pill{padding:2px 5px;border-radius:2px;font-size:8px;font-weight:500;letter-spacing:.5px}
+/* signal card boxes */
+.sig-box{padding:6px 8px;background:rgba(255,255,255,.02);border-radius:3px}
+/* MTF table */
+.mtf-row{display:grid;grid-template-columns:28px 48px 28px 28px 28px 28px 34px 22px;gap:3px;align-items:center;padding:5px 4px;border-bottom:1px solid var(--bd)}
+.mtf-hdr{display:grid;grid-template-columns:28px 48px 28px 28px 28px 28px 34px 22px;gap:3px;padding:3px 4px 0;border-top:1px solid var(--bd);margin-top:2px}
+.cell{text-align:center;cursor:default;position:relative}
+.cell:hover .tip{display:block!important}
+.tip{display:none;position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--bd);border-radius:3px;padding:4px 7px;font-size:8px;color:var(--tx);white-space:nowrap;z-index:99;pointer-events:none;line-height:1.5}
+/* chain table */
+.chain-row{display:grid;grid-template-columns:1fr 36px 38px 28px 8px 28px 38px 36px 1fr;gap:2px;align-items:center;padding:4px 0;border-bottom:1px solid var(--bd)}
+/* gate grid */
+.gate-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:4px}
+.gate{display:flex;align-items:center;gap:4px;padding:3px 6px;border-radius:2px}
+/* news */
+.news-item{padding:6px 8px;border-radius:3px;margin-bottom:4px;background:rgba(255,255,255,.015)}
+/* flow print */
+.flow-print{background:rgba(255,255,255,.015);border:1px solid var(--bd);border-radius:4px;padding:7px 9px;margin-bottom:5px}
+/* levels list */
+.level-row{display:grid;grid-template-columns:1fr 52px 42px;align-items:center;gap:3px;padding:3px 4px;border-radius:2px;margin-bottom:1px}
+/* responsive */
+@media(max-width:1100px){.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.grid3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header class="hdr">
-  <div style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap">
-    <span style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--white);letter-spacing:3px">NVDA</span>
-    <span style="font-size:1.1rem;color:#ff3a5e;font-weight:700">$180.25</span>
-    <span style="font-size:.78rem;color:#ff3a5e">▼ -2.91 (-1.59%)</span>
-    <span style="font-size:.58rem;color:var(--muted)">H186.09·L179.94·ATR$6.29</span>
-    <span style="font-size:.55rem;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.3);color:#4fc3f7;padding:2px 6px;font-weight:700">v6 PROVEN</span>
+<div id="hdr">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="f12 b6 wh" style="letter-spacing:2px">SPY · OCC</span>
+    <span class="dot" id="sig-dot"></span>
+    <span class="f8 txd" style="letter-spacing:1px">v5 · <span id="ct-time"></span> CT</span>
   </div>
-  <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-    <span style="font-size:.66rem;color:#ff3a5e;font-weight:700">🔴 BELOW $180 BEAR</span>
-    <span style="font-size:.64rem;color:#5a7a99"><span class="dot" style="background:#5a7a99;margin-right:2px"></span>🌙 AFTER HOURS</span>
-    <span style="color:#ff3a5e;font-size:.62rem;font-weight:700">SPY BEAR✗</span>
-    <span style="font-size:.6rem;color:var(--muted)">Mar 13·04:53 PM CT</span>
-  </div>
-</header>
-
-<div class="main">
-<div style="background:rgba(255,215,0,.1);border:1px solid #ffd700;padding:5px 14px;font-size:.68rem;color:#ffd700;font-weight:700;text-align:center">⚡ ON LEVEL: $180.34 — CRITICAL PIVOT (DY)</div>
-
-<!-- SESSION BAR -->
-<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px"><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">07:00</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🌅 PRE-MKT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">08:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">⚠️ FAKE-OUT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">09:15</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">📈 CONTINUATION</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">10:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">💤 DEAD ZONE</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">13:00</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🏆 POWER WINDOW</div></div><div style="background:rgba(255,255,255,.018);border:1px solid var(--bd);padding:3px 5px;text-align:center"><div style="font-size:.54rem;color:var(--muted)">14:30</div><div style="font-size:.6rem;font-weight:700;color:var(--muted);white-space:nowrap">🔔 CLOSING PUSH</div></div></div>
-
-<!-- VERDICT -->
-<div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid #ff3a5e;background:linear-gradient(135deg,rgba(11,20,32,.97),rgba(15,26,46,.97));display:grid;grid-template-columns:1fr 140px;gap:10px;align-items:center">
-  <div>
-    <div style="font-size:.53rem;color:var(--muted);letter-spacing:1px;margin-bottom:2px">VERDICT · 04:53 PM CT</div>
-    <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#ff3a5e;line-height:1.2">💤 AFTER HOURS — NO NEW TRADES</div>
-    <div style="font-size:.66rem;color:var(--text);margin-top:3px;line-height:1.45">Market closed. Plan tomorrow.</div>
-    <div style="margin-top:4px;padding:5px 7px;background:rgba(255,255,255,.025);border-left:2px solid #ff3a5e;font-size:.68rem;color:var(--white)">Next: Power Window 1:00 PM CT.</div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:4px">
-    <div style="border:1px solid #ff8c42;color:#ff8c42;padding:4px 8px;font-size:.7rem;letter-spacing:1px;font-weight:700;text-align:center">WAIT</div>
-    <div>
-      <div style="display:flex;justify-content:space-between;font-size:.55rem;margin-bottom:2px"><span style="color:var(--muted)">CALL</span><span style="color:#00ff9d;font-weight:700">0/4</span></div>
-      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0%;background:linear-gradient(90deg,#00c87a,#00ff9d);border-radius:2px"></div></div>
-    </div>
-    <div>
-      <div style="display:flex;justify-content:space-between;font-size:.55rem;margin-bottom:2px"><span style="color:var(--muted)">PUT</span><span style="color:#ff3a5e;font-weight:700">2/4</span></div>
-      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:50%;background:linear-gradient(90deg,#cc1f40,#ff3a5e);border-radius:2px"></div></div>
-    </div>
-    <div style="font-size:.54rem;color:var(--muted);text-align:center;border-top:1px solid var(--bd);padding-top:3px">IV42.6%·DTE28·±$21.27</div>
+  <div style="display:flex;gap:14px;align-items:center">
+    <span class="f9 wh b5" id="hdr-price"></span>
+    <span class="f9" id="hdr-vwap"></span>
+    <span class="f9 txm" id="hdr-rsi"></span>
+    <span class="f9 txm" id="hdr-atr"></span>
+    <span class="f9" id="hdr-vix"></span>
+    <span class="f9 b5" id="hdr-window"></span>
   </div>
 </div>
 
-<!-- MAIN GRID -->
-<div class="g4">
+<div class="grid3" id="main-grid">
 
-  <!-- COL 1: Signals + Divergence -->
-  <div style="display:flex;flex-direction:column;gap:4px">
-    <div style="font-size:.55rem;color:var(--muted);letter-spacing:1.5px;padding:2px 0">PROVEN SIGNALS</div>
-    <div style="background:rgba(255,58,94,.06);border:1px solid rgba(255,58,94,.35);padding:6px 7px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-            <span style="font-size:.56rem;color:#b39ddb;font-weight:700">S1 ICHIMOKU</span>
-            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">15M PF4.18</span>
-          </div>
-          <div style="font-size:.73rem;font-weight:700;color:#ff3a5e">✅ BEAR</div>
-          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">Below cloud·T<183.0</div>
+  <!-- ═══ COL 1 ═══════════════════════════════════════════════════════ -->
+  <div id="col1"></div>
+
+  <!-- ═══ COL 2 ═══════════════════════════════════════════════════════ -->
+  <div id="col2"></div>
+
+  <!-- ═══ COL 3 ═══════════════════════════════════════════════════════ -->
+  <div id="col3"></div>
+
+</div>
+
+<div style="font-size:7px;color:var(--txd);text-align:center;margin-top:9px;opacity:.35">
+  educational only · not financial advice · levels: brando @eliteoptions2 + spyoptions substack · spy close $662.29 mar 13 2026 · auto-refreshes every 30s
+</div>
+
+<script>
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
+const BASE = 662.29;
+const LEVELS = [
+  {spy:684.15,label:"200-Day MA",         type:"ma",     star:true },
+  {spy:677.56,label:"Weekly Resistance",  type:"weekly", star:false},
+  {spy:673.42,label:"Daily R2 / Reclaim", type:"resist", star:true },
+  {spy:670.62,label:"Fibo Pivot",         type:"pivot",  star:false},
+  {spy:667.04,label:"Daily R1",           type:"resist", star:false},
+  {spy:665.24,label:"★ Breakline/Retest", type:"key",    star:true },
+  {spy:663.50,label:"Premarket Pivot",    type:"pivot",  star:false},
+  {spy:662.29,label:"Fri Close",          type:"close",  star:false},
+  {spy:661.36,label:"Friday Low",         type:"key",    star:false},
+  {spy:660.10,label:"Intraday Support",   type:"support",star:false},
+  {spy:657.54,label:"ATR Floor",          type:"support",star:false},
+  {spy:655.00,label:"Weekly S1",          type:"weekly", star:false},
+  {spy:651.60,label:"★ Monthly Demand",   type:"monthly",star:true },
+  {spy:640.57,label:"★ Major Monthly Floor",type:"monthly",star:true},
+];
+const NEWS = [
+  {time:"8:31",src:"ECON",impact:"HIGH",  headline:"Core CPI MoM +0.3% — in line. Fed path unchanged.",          bearish:false},
+  {time:"8:15",src:"FED", impact:"HIGH",  headline:"Fed speakers 10:00 AM ET — Powell on rate path. Watch hawkish tone.",bearish:false},
+  {time:"7:44",src:"SPY", impact:"MED",   headline:"SPX defended 6754 multiple times Friday. $665.24 breakline key.",bearish:false},
+  {time:"7:20",src:"VIX", impact:"MED",   headline:"VIX near 23 — elevated. Wider stops warranted. IV inflated.",  bearish:true },
+  {time:"6:55",src:"MACRO",impact:"LOW",  headline:"Futures flat overnight. Dollar slightly lower. No gap expected.",bearish:false},
+];
+const FLOW_TYPES=["SWEEP","SWEEP","BLOCK","DARK POOL","BLOCK"];
+const SIDES=["ASK","ABOVE ASK","BID","AT BID","ASK"];
+const AGG={"ASK":"Aggressive Buy","ABOVE ASK":"Very Aggressive","BID":"Negotiated Sell","AT BID":"Negotiated","MID":"Neutral"};
+const TOOLS=[
+  {name:"Unusual Whales",   url:"https://unusualwhales.com",    note:"Best free BlackBox alt"},
+  {name:"Cheddar Flow",     url:"https://cheddarflow.com",      note:"Real-time sweeps"},
+  {name:"Market Chameleon", url:"https://marketchameleon.com",  note:"IV rank · chain · skew"},
+  {name:"OptionStrat",      url:"https://optionstrat.com",      note:"P&L visualizer"},
+  {name:"FlowAlgo",         url:"https://flowalgo.com",         note:"Dark pool + smart flow"},
+];
+
+// ─── MATH ─────────────────────────────────────────────────────────────────────
+function ema(a,p){const k=2/(p+1);let e=a[0];return a.map(v=>{e=v*k+e*(1-k);return e;});}
+function rsiV(a,p=14){
+  if(a.length<p+1)return 50;
+  let g=0,l=0;
+  for(let i=1;i<=p;i++){const d=a[i]-a[i-1];d>0?g+=d:l-=d;}
+  let ag=g/p,al=l/p;
+  for(let i=p+1;i<a.length;i++){const d=a[i]-a[i-1];ag=(ag*(p-1)+Math.max(d,0))/p;al=(al*(p-1)+Math.max(-d,0))/p;}
+  return al===0?100:+(100-100/(1+ag/al)).toFixed(1);
+}
+function macdC(a){
+  const line=ema(a,12).map((v,i)=>v-ema(a,26)[i]);
+  const s=ema(line,9);
+  const h=line[line.length-1]-s[s.length-1];
+  const pv=line[line.length-2]-s[s.length-2];
+  return{hist:+h.toFixed(4),prev:+pv.toFixed(4),cross:h>0&&pv<=0};
+}
+function kamaC(a,p=10,f=2,sl=30){
+  const fsc=2/(f+1),ssc=2/(sl+1);let k=a[0];const o=[k];
+  for(let i=1;i<a.length;i++){
+    if(i<p){o.push(k);continue;}
+    const dir=Math.abs(a[i]-a[i-p]);
+    const vol=a.slice(i-p,i).reduce((s,v,j,ar)=>j===0?s:s+Math.abs(v-ar[j-1]),0);
+    const er=vol===0?0:dir/vol;
+    k=k+Math.pow(er*(fsc-ssc)+ssc,2)*(a[i]-k);o.push(k);
+  }
+  return o;
+}
+function vwapC(cs){let pv=0,v=0;return cs.map(c=>{const h=(c.h+c.l+c.c)/3;pv+=h*c.v;v+=c.v;return pv/v;});}
+function erC(a,p=20){
+  if(a.length<p+1)return 0.5;
+  const dir=Math.abs(a[a.length-1]-a[a.length-1-p]);
+  const noise=a.slice(-p-1).reduce((s,v,i,ar)=>i===0?s:s+Math.abs(v-ar[i-1]),0);
+  return noise===0?0:+Math.min(dir/noise,1).toFixed(3);
+}
+function atrC(cs,p=14){
+  if(cs.length<2)return 0;
+  const trs=cs.slice(1).map((c,i)=>Math.max(c.h-c.l,Math.abs(c.h-cs[i].c),Math.abs(c.l-cs[i].c)));
+  return+(trs.slice(-p).reduce((a,v)=>a+v,0)/p).toFixed(3);
+}
+function adxC(cs,p=14){
+  if(cs.length<p+2)return 20;
+  let pDM=0,mDM=0,tr=0;
+  for(let i=1;i<=p;i++){
+    const c=cs[cs.length-p+i-1],pv=cs[cs.length-p+i-2];
+    const up=c.h-pv.h,dn=pv.l-c.l;
+    pDM+=up>dn&&up>0?up:0;mDM+=dn>up&&dn>0?dn:0;
+    tr+=Math.max(c.h-c.l,Math.abs(c.h-pv.c),Math.abs(c.l-pv.c));
+  }
+  if(tr===0)return 20;
+  const dp=(pDM/tr)*100,dm=(mDM/tr)*100;
+  return+((Math.abs(dp-dm)/(dp+dm||1))*100).toFixed(1);
+}
+function rvolC(cs){
+  const r=cs.slice(-5).reduce((s,c)=>s+c.v,0)/5;
+  const b=cs.slice(-30,-5).reduce((s,c)=>s+c.v,0)/25;
+  return b>0?+(r/b).toFixed(2):1;
+}
+function genC(n=120,base=BASE,drift=0){
+  let p=base-0.5;const o=[];
+  const t0=new Date();t0.setHours(9,30,0,0);
+  for(let i=0;i<n;i++){
+    const chg=(Math.random()-0.492+drift)*0.25,rng=0.08+Math.random()*0.26;
+    const op=p,cl=op+chg;
+    o.push({t:new Date(t0.getTime()+i*60000),o:op,h:Math.max(op,cl)+rng*0.45,l:Math.min(op,cl)-rng*0.45,c:cl,v:350000+Math.random()*900000});
+    p=cl;
+  }
+  return o;
+}
+function resamp(c,m){
+  const o=[];
+  for(let i=0;i<c.length;i+=m){
+    const s=c.slice(i,i+m);if(!s.length)continue;
+    o.push({t:s[0].t,o:s[0].o,h:Math.max(...s.map(x=>x.h)),l:Math.min(...s.map(x=>x.l)),c:s[s.length-1].c,v:s.reduce((a,x)=>a+x.v,0)});
+  }
+  return o;
+}
+function ind(cs){
+  const cl=cs.map(c=>c.c),ks=kamaC(cl),vw=vwapC(cs);
+  const r=rsiV(cl),mc=macdC(cl);
+  const last=cs[cs.length-1],hlc3=(last.h+last.l+last.c)/3;
+  const p=cl[cl.length-1],kn=ks[ks.length-1],vn=vw[vw.length-1];
+  const bK=hlc3>kn,bV=p>vn,bR=r>50,bM=mc.hist>0;
+  const atr=atrC(cs),adx=adxC(cs),rvol=rvolC(cs),bVol=rvol>=1.0;
+  return{r,mc,hlc3,p,kn,vn,bK,bV,bR,bM,bVol,atr,adx,rvol,score:[bK,bV,bR,bM].filter(Boolean).length};
+}
+function genFlow(price){
+  const strikes=Array.from({length:9},(_,i)=>Math.round(price-4+i));
+  return Array.from({length:5},(_,i)=>{
+    const cp=i%2===0?"CALL":"PUT",K=strikes[i+1];
+    const cts=Math.floor(700+Math.random()*5300),px=+(0.5+Math.random()*4.8).toFixed(2);
+    const prem=Math.floor(cts*px*100);
+    return{cp,flowType:FLOW_TYPES[i],K:`${K}${cp==="CALL"?"C":"P"}`,
+      exp:["3/17","3/18","3/19","3/21"][i%4],cts,px,prem,
+      side:SIDES[i],agg:AGG[SIDES[i]],isAgg:SIDES[i].includes("ASK"),
+      unusual:cts>3000||prem>400000,dark:FLOW_TYPES[i]==="DARK POOL",
+      time:new Date(Date.now()-(i*7*60000+Math.random()*90000)).toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:false})};
+  });
+}
+function genChain(spot){
+  return[-3,-2,-1,0,1,2,3].map(d=>{
+    const K=Math.round(spot+d),m=(spot-K)/spot;
+    const delta=Math.max(0.05,Math.min(0.95,0.5+m*9));
+    const callPx=Math.max(0.05,((spot-K)*Math.max(delta-0.5,0)+0.7+Math.random()*0.6)).toFixed(2);
+    const putPx=Math.max(0.05,((K-spot)*Math.max(0.5-delta,0)+0.7+Math.random()*0.6)).toFixed(2);
+    const cVol=Math.floor(2000+Math.random()*25000),pVol=Math.floor(2000+Math.random()*25000);
+    const cOI=Math.floor(8000+Math.random()*60000),pOI=Math.floor(8000+Math.random()*60000);
+    const spread=+(Math.random()*0.08+0.01).toFixed(2);
+    const iv=+(0.15+Math.random()*0.08+Math.abs(m)*0.6).toFixed(3);
+    return{K,callPx,putPx,delta:delta.toFixed(2),cVol,pVol,cOI,pOI,spread,iv,itm:K<spot};
+  });
+}
+
+// ─── FORMAT ───────────────────────────────────────────────────────────────────
+const fmt=v=>`$${(+v).toFixed(2)}`;
+const fK=v=>v>=1000?`${(v/1000).toFixed(1)}K`:v.toString();
+const p2p=(p,pct)=>+(p*(1+pct)).toFixed(2);
+function cl(color){return`color:${color}`;}
+function bg(color){return`background:${color}`;}
+const U='var(--up)',D='var(--dn)',A='var(--am)',B='var(--bl)',P='var(--pu)',W='var(--wh)';
+const TX='var(--tx)',TM='var(--txm)',TD='var(--txd)';
+const BD='var(--bd)',CD='var(--card)';
+
+// ─── LEVEL COLOR ──────────────────────────────────────────────────────────────
+function levelColor(type){
+  return type==="resist"||type==="ma"?D:type==="support"||type==="monthly"?U:type==="weekly"?P:TM;
+}
+
+// ─── MAIN STATE ───────────────────────────────────────────────────────────────
+const c1m  = genC(120,BASE,-0.0005);
+const flow = genFlow(BASE);
+const vix  = +(18+Math.random()*12).toFixed(1);
+let price  = BASE;
+
+function compute(){
+  const c3m=resamp(c1m,3),c5m=resamp(c1m,5),c15m=resamp(c1m,15),c30m=resamp(c1m,30),c1h=resamp(c1m,60);
+  const i1m=ind(c1m),i3m=ind(c3m),i5m=ind(c5m),i15m=ind(c15m),i30m=ind(c30m),i1h=ind(c1h);
+  const wt=i1h.score*2+i30m.score*1.5+i15m.score+i5m.score+i3m.score*1.5+i1m.score;
+  const wtMax=4*(2+1.5+1+1+1.5+1);
+  const bullPct=wt/wtMax;
+  const sig=bullPct>0.58?"CALL":bullPct<0.42?"PUT":"WAIT";
+  const sigC=sig==="CALL"?U:sig==="PUT"?D:A;
+  const passingTFs=[i1h,i30m,i15m,i5m,i3m,i1m].filter(i=>i.score>=3).length;
+  const gates=[
+    {id:"G1",name:"KAMA",   pass:i3m.bK&&i1m.bK},
+    {id:"G2",name:"RSI>50", pass:i3m.bR&&i1m.bR},
+    {id:"G3",name:"MACD",   pass:i3m.bM},
+    {id:"G4",name:"VWAP",   pass:i3m.bV&&i1m.bV},
+    {id:"G5",name:"RVOL",   pass:i5m.bVol},
+    {id:"G6",name:"ADX",    pass:i5m.adx>=20},
+  ];
+  const passGates=gates.filter(g=>g.pass).length;
+  const er5=erC(c5m.map(c=>c.c));
+  const entryOk=passGates>=4&&er5>0.35&&sig!=="WAIT";
+  const isBull=sig==="CALL";
+  const atr5=i5m.atr;
+  const t1=isBull?p2p(price,0.0045):p2p(price,-0.0045);
+  const t2=isBull?p2p(price,0.009):p2p(price,-0.009);
+  const stop=isBull?+(price-atr5*0.8).toFixed(2):+(price+atr5*0.8).toFixed(2);
+  const above=LEVELS.filter(l=>l.spy>price).sort((a,b)=>a.spy-b.spy)[0];
+  const below=LEVELS.filter(l=>l.spy<price).sort((a,b)=>b.spy-a.spy)[0];
+  const callP=flow.filter(f=>f.cp==="CALL").reduce((s,f)=>s+f.prem,0);
+  const putP=flow.filter(f=>f.cp==="PUT").reduce((s,f)=>s+f.prem,0);
+  const tot=callP+putP||1;
+  const flowBull=callP/tot;
+  const flowLC=flowBull>0.6?U:flowBull<0.4?D:A;
+  const flowLbl=flowBull>0.6?"Call dominant":flowBull<0.4?"Put dominant":"Neutral";
+  const chain=genChain(price);
+  const expDate=(()=>{const d=new Date();d.setDate(d.getDate()+2);return d.toLocaleDateString("en-US",{month:"numeric",day:"numeric"});})();
+  const now=new Date(),ct=new Date(now.toLocaleString("en-US",{timeZone:"America/Chicago"}));
+  const ctH=ct.getHours()+ct.getMinutes()/60;
+  const inWin=ctH>=9.75&&ctH<=10.5,pastCut=ctH>10.5;
+  const ctStr=ct.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",timeZone:"America/Chicago"});
+  const vixC=vix>=32?D:vix>=25?A:U;
+  const vixLbl=vix>=32?"HIGH RISK — size down":vix>=25?"ELEVATED — reduce size":"NORMAL";
+  const TFS=[
+    {tf:"1H", i:i1h, role:"Context", desc:"Big picture"},
+    {tf:"30m",i:i30m,role:"Context", desc:"Structure"},
+    {tf:"15m",i:i15m,role:"Filter",  desc:"Direction"},
+    {tf:"5m", i:i5m, role:"Setup",   desc:"KAMA main"},
+    {tf:"3m", i:i3m, role:"Trigger", desc:"Confirm"},
+    {tf:"1m", i:i1m, role:"Trigger", desc:"Timing"},
+  ];
+  return{sig,sigC,bullPct,passingTFs,gates,passGates,entryOk,er5,isBull,t1,t2,stop,above,below,callP,putP,flowBull,flowLC,flowLbl,chain,expDate,inWin,pastCut,ctStr,vixC,vixLbl,TFS,i1m,i3m,i5m,i15m,i30m,i1h};
+}
+
+// ─── RENDER HELPERS ───────────────────────────────────────────────────────────
+function cell(ok,tip){
+  return `<div class="cell" style="text-align:center"><span style="${cl(ok?U:D)};font-size:10px;">${ok?"▲":"▼"}</span><div class="tip">${tip}</div></div>`;
+}
+function scoreHtml(sc){
+  const c=sc===4?U:sc===3?"#86efac":sc===2?A:sc===1?"#fca5a5":D;
+  return `<div style="text-align:center;background:${c}22;border-radius:2px;padding:1px 3px"><span style="${cl(c)};font-size:11px;font-weight:600">${sc}</span><span style="${cl(TD)};font-size:8px">/4</span></div>`;
+}
+function roleColor(r){return r==="Trigger"?A:r==="Setup"?B:r==="Filter"?TX:TM;}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render(){
+  price=+(BASE+(Math.random()-0.505)*0.08).toFixed(2);
+  const S=compute();
+
+  // ── HEADER ─────────────────────────────────────────────────────────────────
+  document.getElementById("sig-dot").style.background=S.sigC;
+  document.getElementById("ct-time").textContent=S.ctStr;
+  document.getElementById("hdr-price").textContent=fmt(price);
+  document.getElementById("hdr-vwap").style.color=S.i5m.bV?U:D;
+  document.getElementById("hdr-vwap").textContent=`VWAP ${fmt(S.i5m.vn)} ${S.i5m.bV?"↑":"↓"}`;
+  document.getElementById("hdr-rsi").textContent=`RSI ${S.i5m.r}`;
+  document.getElementById("hdr-atr").textContent=`ATR ${S.i5m.atr}`;
+  document.getElementById("hdr-vix").style.color=S.vixC;
+  document.getElementById("hdr-vix").textContent=`VIX ${vix} · ${S.vixLbl}`;
+  document.getElementById("hdr-window").style.color=S.inWin?U:S.pastCut?D:A;
+  document.getElementById("hdr-window").textContent=S.pastCut?"⛔ CUTOFF":S.inWin?"✓ IN WINDOW":"⏳ PRE-WINDOW";
+
+  // ── COL 1 ──────────────────────────────────────────────────────────────────
+  const isBull=S.sig==="CALL";
+  document.getElementById("col1").innerHTML=`
+
+  <!-- SIGNAL CARD -->
+  <div class="card" style="border-color:${S.sigC}22">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+      <div>
+        <span class="lbl" style="margin-bottom:3px">Signal</span>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="${cl(S.sigC)};font-size:22px;font-weight:600;letter-spacing:3px;line-height:1">${S.sig}</span>
+          <span style="${cl(TM)};font-size:9px">${Math.round(S.bullPct*100)}%</span>
         </div>
-    <div style="background:rgba(255,58,94,.06);border:1px solid rgba(255,58,94,.35);padding:6px 7px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-            <span style="font-size:.56rem;color:#7c4dff;font-weight:700">S2 KAUFMAN</span>
-            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">4H PF4.34</span>
-          </div>
-          <div style="font-size:.73rem;font-weight:700;color:#ff3a5e">✅ BEAR</div>
-          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">HLC3<184.8·KAMA↓·ER0.14</div>
-        </div>
-    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.35);padding:6px 7px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-            <span style="font-size:.56rem;color:#4fc3f7;font-weight:700">S3 RSI</span>
-            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">1H 77%WR</span>
-          </div>
-          <div style="font-size:.73rem;font-weight:700;color:#5a7a99">⏸ OS</div>
-          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">RSI28 wait 45/55</div>
-        </div>
-    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.35);padding:6px 7px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-            <span style="font-size:.56rem;color:#ff8c42;font-weight:700">S4 MACD+RSI</span>
-            <span style="font-size:.52rem;color:var(--muted);background:rgba(255,255,255,.05);padding:1px 4px">1H 68%WR</span>
-          </div>
-          <div style="font-size:.73rem;font-weight:700;color:#5a7a99">⏸ WAIT</div>
-          <div style="font-size:.6rem;color:var(--text);margin-top:1px;line-height:1.35;opacity:.9">MACD-0.482·RSI28</div>
-        </div>
-    <div style="background:rgba(90,122,153,.06);border:1px solid rgba(90,122,153,.3);padding:6px 7px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
-        <span style="font-size:.55rem;color:var(--muted);letter-spacing:.5px">DIV BONUS</span><span style="color:var(--muted);font-size:.58rem">No action</span>
       </div>
-      <div style="font-size:.7rem;font-weight:700;color:#5a7a99">No divergence</div>
-      <div style="font-size:.58rem;color:var(--text);margin-top:1px">No divergence on 1H</div>
+      <div style="text-align:right">
+        <div style="${cl(TD)};font-size:9px;margin-bottom:3px">TF agreement</div>
+        <span style="${cl(S.sigC)};font-size:16px;font-weight:600">${S.passingTFs}</span>
+        <span style="${cl(TM)};font-size:11px">/${S.TFS.length}</span>
+        <div style="${cl(TD)};font-size:8px">${S.passingTFs} of ${S.TFS.length} TFs ≥3/4</div>
+      </div>
+    </div>
+    <div style="height:2px;background:var(--bd);border-radius:1px;margin-bottom:8px;overflow:hidden">
+      <div style="height:100%;width:${Math.round(S.bullPct*100)}%;background:${S.sigC};border-radius:1px;transition:width .5s"></div>
+    </div>
+    <!-- Targets -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px">
+      ${[
+        {l:"ENTRY",      v:fmt(price),      s:"now",                            c:W},
+        {l:"STOP (ATR)", v:fmt(S.stop),     s:`ATR×0.8 = ${(S.i5m.atr*0.8).toFixed(2)}`,c:D},
+        {l:"TARGET 1",   v:fmt(S.t1),       s:"+0.45% · scale 50%",            c:U},
+        {l:"TARGET 2",   v:fmt(S.t2),       s:"+0.90% · full exit",            c:U},
+      ].map(r=>`<div class="sig-box"><div style="${cl(TD)};font-size:8px;letter-spacing:1px;margin-bottom:2px">${r.l}</div><div style="${cl(r.c)};font-size:13px;font-weight:500;line-height:1">${r.v}</div><div style="${cl(TD)};font-size:8px;margin-top:2px">${r.s}</div></div>`).join("")}
+    </div>
+    <!-- Gates -->
+    <div style="border-top:1px solid var(--bd);padding-top:7px;margin-bottom:7px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="${cl(TD)};font-size:8px;letter-spacing:1.5px">ENTRY GATES (need 4/6)</span>
+        <span style="${cl(S.passGates>=4?U:D)};font-size:9px;font-weight:500">${S.passGates}/${S.gates.length} ${S.entryOk?"→ VALID":"→ WAIT"}</span>
+      </div>
+      <div class="gate-grid">
+        ${S.gates.map(g=>`<div class="gate" style="background:${g.pass?"rgba(74,222,128,.06)":"rgba(248,113,113,.04)"}"><span style="${cl(g.pass?U:D)};font-size:8px">${g.pass?"✓":"✗"}</span><span style="${cl(g.pass?TX:TM)};font-size:8px">${g.name}</span></div>`).join("")}
+      </div>
+    </div>
+    <!-- Robinhood guide -->
+    <div style="border-top:1px solid var(--bd);padding-top:7px">
+      <span class="lbl" style="margin-bottom:5px">Robinhood Guide · 2 DTE</span>
+      ${[
+        ["Expiry",   S.expDate,             "2 days out — sweet spot"],
+        ["Strike",   "ATM ± $1",            "Delta 0.42–0.52 target"],
+        ["Look for", "Tight bid/ask",        "< $0.08 spread on SPY"],
+        ["Avoid",    "IV Rank > 70%",        "Premium too expensive"],
+        ["Min OI",   "1,000+ per strike",    "Ensure liquidity"],
+        ["Bid/Ask",  "Limit at midpoint",    "Never market order"],
+      ].map(([k,v,note])=>`<div class="row"><span style="${cl(TM)};font-size:8px;min-width:52px">${k}</span><span style="${cl(TX)};font-size:9px;flex:1;text-align:center">${v}</span><span style="${cl(TD)};font-size:8px;text-align:right">${note}</span></div>`).join("")}
     </div>
   </div>
 
-  <!-- COL 2: Brando + Scenario -->
-  <div style="display:flex;flex-direction:column;gap:4px">
-    <div class="card" style="padding:7px">
-      <div class="ct">Brando S/R</div>
-      <table style="table-layout:fixed">
-        <colgroup><col style="width:20px"><col style="width:38px"><col><col style="width:32px"></colgroup>
-        <tr><th>TF</th><th>$</th><th>LABEL</th><th style="text-align:right">DIST</th></tr>
-        <tr style="background:rgba(255,215,0,.04);"><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$180</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★CRITICAL PIVOT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+0.1</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$185</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★KEY RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+4.3</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#ff6b6b;font-weight:700;font-size:.65rem">$190</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+10.2</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#b39ddb;font-size:.56rem">MO</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$191</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★YELLOW LINE $191</td><td style="color:var(--muted);font-size:.56rem;text-align:right">+10.8</td></tr><tr style="background:rgba(255,215,0,.09)"><td colspan="2" style="color:#ffd700;font-weight:700;font-size:.7rem">▶$180.25</td><td colspan="2" style="color:#ffd700;font-size:.55rem;text-align:right">⚡CRITICAL P</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$175</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-5.0</td></tr><tr style="background:rgba(255,215,0,.04);"><td style="color:#7c4dff;font-size:.56rem">WK</td><td style="color:#ffd700;font-weight:700;font-size:.65rem">$175</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis">★CRITICAL SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-5.2</td></tr><tr style=""><td style="color:#4fc3f7;font-size:.56rem">DY</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$169</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> SUPPORT</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-11.6</td></tr><tr style=""><td style="color:#b39ddb;font-size:.56rem">MO</td><td style="color:#00c87a;font-weight:700;font-size:.65rem">$168</td><td style="color:var(--muted);font-size:.56rem;overflow:hidden;text-overflow:ellipsis"> RESISTANCE</td><td style="color:var(--muted);font-size:.56rem;text-align:right">-12.2</td></tr>
-      </table>
+  <!-- EXIT CARD -->
+  <div class="card">
+    <span class="lbl">Exit Rules</span>
+    ${[
+      {k:"Scale 50%", v:`Premium +40–50% → ${fmt(isBull?p2p(price,.0045):p2p(price,-.0045))} underlying`,c:U},
+      {k:"Full exit", v:"Premium +80% or KAMA 5m flips (arrow ↓)",                                      c:U},
+      {k:"Hard stop", v:`Premium –35% · Underlying hits ${fmt(S.stop)}`,                                 c:D},
+      {k:"Time stop", v:"10:30 AM CT — close everything, no exceptions",                                  c:A},
+      {k:"MACD flip", v:"3m histogram negative → trim 50% immediately",                                  c:TM},
+      {k:"IV crush",  v:"VIX spikes mid-trade → tighten to –25% stop",                                   c:TM},
+    ].map(r=>`<div class="row"><span style="${cl(r.c)};font-size:8px;min-width:64px;font-weight:500">${r.k}</span><span style="${cl(TM)};font-size:8px;text-align:right;line-height:1.4">${r.v}</span></div>`).join("")}
+  </div>`;
+
+  // ── COL 2 ──────────────────────────────────────────────────────────────────
+  const TFS=S.TFS;
+  document.getElementById("col2").innerHTML=`
+
+  <!-- MTF ALIGNMENT -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span class="lbl" style="margin-bottom:0">MTF Alignment · Matt Method</span>
+      <span style="${cl(TD)};font-size:8px">need 4+ TFs ≥3/4</span>
     </div>
-    <div class="card" style="padding:7px">
-      <div class="ct">Scenario</div>
-      <div style="background:#ff3a5e10;border:1px solid #ff3a5e55;padding:5px;margin-bottom:5px">
-        <div style="font-size:.73rem;font-weight:700;color:#ff3a5e">🔴 BELOW $180 BEAR</div>
-        <div style="font-size:.55rem;color:var(--muted);margin-top:2px">R <strong style="color:#ff6b6b">$180.34</strong>+0.1 · S <strong style="color:#00ff9d">$175.00</strong>-5.2</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:4px">
-        <div style="background:rgba(0,255,157,.04);border:1px solid rgba(0,255,157,.22);padding:4px">
-          <div style="font-size:.52rem;color:#00ff9d;font-weight:700;margin-bottom:2px">A BULL</div>
-          <div style="font-size:.6rem;color:var(--text);line-height:1.35">PUT active. Target $175 weekly. Stop above $180.34.</div>
+    <!-- Legend -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:5px 6px;background:rgba(255,255,255,.015);border-radius:3px;margin-bottom:7px">
+      ${[
+        {k:"K",  v:"HLC3 vs KAMA",    d:"Blue cross red"},
+        {k:"R",  v:"RSI vs 50",       d:">50 = bull"},
+        {k:"M",  v:"MACD histogram",  d:"+ bull − bear"},
+        {k:"V",  v:"Price vs VWAP",   d:"Above = inst."},
+        {k:"Vol",v:"RVOL ≥1.0",       d:"Confirms move"},
+      ].map(x=>`<div style="text-align:center;padding:3px 2px"><div style="${cl(B)};font-size:9px;font-weight:500;margin-bottom:1px">${x.k}</div><div style="${cl(TM)};font-size:7px;line-height:1.3">${x.v}</div><div style="${cl(TD)};font-size:7px;line-height:1.3">${x.d}</div></div>`).join("")}
+    </div>
+    <!-- Rows -->
+    ${TFS.map(({tf,i,role,desc})=>{
+      const sc=i.score;
+      const scC=sc===4?U:sc===3?"#86efac":sc===2?A:sc===1?"#fca5a5":D;
+      const rc=roleColor(role);
+      const kTip=`HLC3 ${fmt(i.hlc3)} ${i.bK?">":" <"} KAMA ${fmt(i.kn)}`;
+      const rTip=`RSI ${i.r} ${i.bR?"&gt; 50":"&lt; 50"}`;
+      const mTip=`MACD hist ${i.mc.hist>0?"+":""}${i.mc.hist}${i.mc.cross?" ← CROSS":""}`;
+      const vTip=`Price ${fmt(i.p)} ${i.bV?">":" <"} VWAP ${fmt(i.vn)}`;
+      const volTip=`RVOL ${i.rvol}x ${i.bVol?"✓ confirms":"✗ weak vol"}`;
+      return `<div class="mtf-row">
+        <span style="${cl(rc)};font-size:10px;font-weight:500">${tf}</span>
+        <span style="${cl(rc)};font-size:8px;line-height:1.2">${desc}</span>
+        ${cell(i.bK,kTip)}${cell(i.bR,rTip)}${cell(i.bM,mTip)}${cell(i.bV,vTip)}${cell(i.bVol,volTip)}
+        ${scoreHtml(sc)}
+      </div>`;
+    }).join("")}
+    <div class="mtf-hdr">
+      ${["TF","Role","K","R","M","V","Vol","◎"].map(h=>`<div style="text-align:${["TF","Role"].includes(h)?"left":"center"};font-size:7px;${cl(TD)}">${h}</div>`).join("")}
+    </div>
+    <!-- Regime -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:7px;padding:5px 6px;background:rgba(255,255,255,.01);border-radius:3px">
+      ${[
+        {k:"ER (5m)",  v:S.er5,         c:S.er5>0.6?U:S.er5>0.35?A:D, note:S.er5>0.6?"Trending":S.er5>0.35?"Transit":"Chop"},
+        {k:"ADX (5m)", v:S.i5m.adx,     c:S.i5m.adx>=25?U:S.i5m.adx>=20?A:D, note:S.i5m.adx>=25?"Strong":"Weak"},
+        {k:"ATR (5m)", v:S.i5m.atr,     c:TX, note:"Volatility"},
+      ].map(r=>`<div><div style="${cl(TD)};font-size:7px;margin-bottom:1px">${r.k}</div><span style="${cl(r.c)};font-size:11px;font-weight:500">${r.v}</span><span style="${cl(TD)};font-size:7px;margin-left:4px">${r.note}</span></div>`).join("")}
+    </div>
+  </div>
+
+  <!-- OPTIONS CHAIN -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+      <span class="lbl" style="margin-bottom:0">Options Chain · 2 DTE ${S.expDate}</span>
+      <span style="${cl(TD)};font-size:8px">ATM ± 3 strikes</span>
+    </div>
+    <div class="chain-row" style="border-bottom-width:2px">
+      ${["Bid","Vol","OI","Δ","K","Δ","OI","Vol","Bid"].map((h,i)=>`<div style="text-align:${i===4?"center":i<4?"right":"left"};font-size:7px;${cl(i===0?U:i===8?D:TD)};font-weight:500">${h==="K"?"":h}</div>`).join("")}
+
+    </div>
+    ${S.chain.map(row=>{
+      const atm=Math.abs(row.K-price)<0.5;
+      return `<div class="chain-row" style="background:${atm?"rgba(255,255,255,.03)":"transparent"}">
+        <span style="text-align:right;font-size:10px;${cl(row.itm?U:TX)};font-weight:${row.itm?500:400}">${fmt(row.callPx)}</span>
+        <span style="text-align:right;font-size:8px;${cl(TM)}">${fK(row.cVol)}</span>
+        <span style="text-align:right;font-size:8px;${cl(TM)}">${fK(row.cOI)}</span>
+        <span style="text-align:right;font-size:8px;${cl(TX)}">+${row.delta}</span>
+        <div style="text-align:center"><span style="font-size:${atm?10:9}px;font-weight:${atm?600:400};${cl(atm?A:TM)}">${row.K}</span></div>
+        <span style="font-size:8px;${cl(TX)}">−${(1-parseFloat(row.delta)).toFixed(2)}</span>
+        <span style="font-size:8px;${cl(TM)}">${fK(row.pOI)}</span>
+        <span style="font-size:8px;${cl(TM)}">${fK(row.pVol)}</span>
+        <span style="font-size:10px;${cl(!row.itm?D:TX)};font-weight:${!row.itm?500:400}">${fmt(row.putPx)}</span>
+      </div>`;
+    }).join("")}
+    <div style="display:flex;gap:12px;margin-top:6px;padding:4px 2px;font-size:8px;${cl(TD)}">
+      <span>Spread ${fmt(S.chain[3]?.spread||0)}</span>
+      <span>ATM IV ~${((S.chain[3]?.iv||0.18)*100).toFixed(0)}%</span>
+      <span style="margin-left:auto">Amber = ATM</span>
+    </div>
+  </div>
+
+  <!-- S/R LEVELS -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span class="lbl" style="margin-bottom:0">Levels · @EliteOptions2</span>
+      <span style="${cl(TD)};font-size:8px">SPX÷10.18 · Mar 13</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:7px">
+      ${[{l:"Support ↓",lvl:S.below,c:U},{l:"Resist ↑",lvl:S.above,c:D}].map(({l,lvl,c})=>`
+      <div style="padding:5px 7px;background:rgba(255,255,255,.02);border-radius:3px;border-left:2px solid ${c}44">
+        <div style="${cl(TD)};font-size:8px;margin-bottom:2px">${l}</div>
+        <div style="${cl(c)};font-size:12px;font-weight:600">${fmt(lvl?.spy||0)}</div>
+        <div style="${cl(TD)};font-size:8px">${lvl?.label||""}</div>
+        <div style="${cl(c+"99")};font-size:8px;margin-top:1px">${lvl?`${((lvl.spy-price)/price*100).toFixed(2)}% away`:""}</div>
+      </div>`).join("")}
+    </div>
+    <div style="max-height:150px;overflow-y:auto">
+      ${LEVELS.map(l=>{
+        const d=price-l.spy,near=Math.abs(d)<1.8;
+        const tc=levelColor(l.type);
+        return `<div class="level-row" style="background:${near?"rgba(255,255,255,.02)":"transparent"};border-left:2px solid ${near?tc:BD}">
+          <span style="${cl(near?TX:TD)};font-size:8px">${l.label}</span>
+          <span style="${cl(near?tc:TM)};font-size:9px;font-weight:${near?600:400};text-align:right">${fmt(l.spy)}</span>
+          <span style="${cl(d>0?U+"55":D+"55")};font-size:8px;text-align:right">${d>0?"+":""}${d.toFixed(2)}</span>
+        </div>`;
+      }).join("")}
+    </div>
+  </div>`;
+
+  // ── COL 3 ──────────────────────────────────────────────────────────────────
+  const fCallPct=(S.flowBull*100).toFixed(0);
+  const fPutPct=((1-S.flowBull)*100).toFixed(0);
+  document.getElementById("col3").innerHTML=`
+
+  <!-- NEWS -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+      <span class="lbl" style="margin-bottom:0">Market News</span>
+      <span style="${cl(TD)};font-size:8px">pre-market · ${new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span>
+    </div>
+    ${NEWS.map(n=>{
+      const ic=n.impact==="HIGH"?D:n.impact==="MED"?A:TM;
+      return `<div class="news-item" style="border-left:2px solid ${ic}44">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <span style="${cl(TD)};font-size:8px">${n.time}</span>
+          <span class="pill" style="${cl(ic)};background:${ic}14">${n.src}</span>
+          <span style="${cl(ic)};font-size:8px;margin-left:auto">${n.impact}</span>
         </div>
-        <div style="background:rgba(255,58,94,.04);border:1px solid rgba(255,58,94,.22);padding:4px">
-          <div style="font-size:.52rem;color:#ff3a5e;font-weight:700;margin-bottom:2px">B BEAR</div>
-          <div style="font-size:.6rem;color:var(--text);line-height:1.35">Bounce to $180.34 fails → add puts.</div>
+        <div style="font-size:9px;${cl(n.impact==="HIGH"?TX:TM)};line-height:1.5">${n.headline}</div>
+      </div>`;
+    }).join("")}
+  </div>
+
+  <!-- OPTIONS FLOW -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span class="lbl" style="margin-bottom:0">Options Flow · Smart Money</span>
+      <span style="${cl(S.flowLC)};font-size:9px;font-weight:500">${S.flowLbl}</span>
+    </div>
+    <div style="margin-bottom:7px">
+      <div style="height:3px;background:var(--bd);border-radius:2px;overflow:hidden;display:flex;margin-bottom:3px">
+        <div style="height:100%;width:${fCallPct}%;background:var(--up);transition:width .5s"></div>
+        <div style="height:100%;flex:1;background:var(--dn)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:8px">
+        <span style="${cl(U)}">Calls ${fCallPct}% · $${(S.callP/1000).toFixed(0)}K</span>
+        <span style="${cl(D)}">$${(S.putP/1000).toFixed(0)}K · ${fPutPct}% Puts</span>
+      </div>
+    </div>
+    ${flow.map(f=>{
+      const cpC=f.cp==="CALL"?U:D;
+      const ftC=f.flowType==="SWEEP"?A:f.flowType==="BLOCK"?P:B;
+      const ftBg=f.flowType==="SWEEP"?"rgba(251,191,36,.09)":f.flowType==="BLOCK"?"rgba(167,139,250,.09)":"rgba(96,165,250,.08)";
+      return `<div class="flow-print" style="border-left:2px solid ${cpC}33">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px">
+          <span class="pill" style="${cl(cpC)};background:${cpC==="var(--up)"?"rgba(74,222,128,.10)":"rgba(248,113,113,.10)"}">${f.cp}</span>
+          ${f.dark?`<span class="pill" style="${cl(B)};background:rgba(96,165,250,.10)">DARK</span>`:""}
+          <span class="pill" style="${cl(ftC)};background:${ftBg}">${f.flowType}</span>
+          ${f.unusual?`<span class="pill" style="${cl(A)};background:rgba(251,191,36,.08)">UNUSUAL</span>`:""}
+          <span style="font-size:11px;font-weight:500;${cl(W)};margin-left:auto">$${(f.prem/1000).toFixed(0)}K</span>
         </div>
-      </div>
-      <div style="font-size:.6rem;line-height:1.6;background:rgba(0,0,0,.15);padding:4px;border:1px solid var(--bd)">
-        ❌ <strong style="color:#ffd700">$191</strong>
-        ❌ <strong style="color:#4fc3f7">$184</strong>
-        ❌ <strong style="color:#ff8c42">$180★</strong>
-        ✅ <strong style="color:#7c4dff">$175</strong>
-        ✅ <strong style="color:#b39ddb">$153</strong>
-      </div>
-    </div>
+        <div style="display:grid;grid-template-columns:56px 52px 1fr 38px;gap:3px;align-items:center;margin-bottom:3px">
+          <span style="font-size:10px;font-weight:500;${cl(cpC)}">${f.K}</span>
+          <span style="font-size:8px;${cl(TM)}">exp ${f.exp}</span>
+          <span style="font-size:8px;${cl(TM)}">${f.cts.toLocaleString()} cts</span>
+          <span style="font-size:8px;${cl(TD)};text-align:right">${f.time}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span class="pill" style="${cl(f.isAgg?A:TM)};background:${f.isAgg?"rgba(251,191,36,.07)":"rgba(255,255,255,.02)"};font-weight:${f.isAgg?500:400}">${f.agg}</span>
+          <span style="font-size:8px;${cl(TD)}">@ ${f.side} · $${f.px}/contract</span>
+        </div>
+      </div>`;
+    }).join("")}
   </div>
 
-  <!-- COL 3: Call + Put -->
-  <div style="display:grid;grid-template-rows:auto auto;gap:4px">
-    <div class="card" style="padding:7px">
-      <div class="ct">Call (0/4)</div>
-      <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:.58rem;color:var(--muted);margin-bottom:2px"><span>SIGNALS</span><span style="color:#00ff9d;font-weight:700">0/4</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0%;background:#00ff9d;border-radius:2px"></div></div></div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S1 ICHI: Below cloud·T<183.0</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S2 KAMA: HLC3<184.8·KAMA↓·ER0.14</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S3 RSI: RSI28 wait 45/55</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S4 MACD: MACD-0.482·RSI28</div><div style="font-size:.54rem;color:var(--muted);letter-spacing:.5px;margin:5px 0 2px">CONTEXT</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ Below $180.34 — vs Brando</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ SPY headwind</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ Low-vol pullback 0.89x</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ AFTER HOURS</div>
-      <div style="background:rgba(255,255,255,.02);border:1px solid #00ff9d44;padding:6px;margin-top:5px">
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3px;text-align:center;margin-bottom:4px">
-            <div><div style="font-size:.52rem;color:var(--muted)">ENTRY</div><div style="font-size:.76rem;color:var(--white);font-weight:700">$6.15</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">STOP</div><div style="font-size:.76rem;color:var(--red);font-weight:700">$4.00</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">TARGET</div><div style="font-size:.76rem;color:var(--green);font-weight:700">$9.84</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">R:R</div><div style="font-size:.76rem;font-weight:700;color:#ffd700">1.7:1</div></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted)">
-            <span>$500·1ct</span><span style="color:var(--red)">max $215</span>
-          </div></div>
-    </div>
-    <div class="card" style="padding:7px">
-      <div class="ct">Put (2/4)</div>
-      <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:.58rem;color:var(--muted);margin-bottom:2px"><span>SIGNALS</span><span style="color:#ff3a5e;font-weight:700">2/4</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:50%;background:#ff3a5e;border-radius:2px"></div></div></div><div style="font-size:.62rem;color:#00ff9d;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">✅ S1 ICHI: Below cloud·T<183.0</div><div style="font-size:.62rem;color:#00ff9d;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">✅ S2 KAMA: HLC3<184.8·KAMA↓·ER0.14</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S3 RSI: RSI28 wait 45/55</div><div style="font-size:.62rem;color:#ff3a5e;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.3">❌ S4 MACD: MACD-0.482·RSI28</div><div style="font-size:.54rem;color:var(--muted);letter-spacing:.5px;margin:5px 0 2px">CONTEXT</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ Below $180.34 bias</div><div style="font-size:.6rem;color:#00ff9d;padding:1px 0;line-height:1.3">✅ SPY tailwind</div><div style="font-size:.6rem;color:#ff3a5e;padding:1px 0;line-height:1.3">❌ Low-vol decline — dead cat</div><div style="font-size:.6rem;color:#ffd700;padding:1px 0;line-height:1.3">⚠️ AFTER HOURS</div>
-      <div style="background:rgba(255,255,255,.02);border:1px solid #ff3a5e44;padding:6px;margin-top:5px">
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3px;text-align:center;margin-bottom:4px">
-            <div><div style="font-size:.52rem;color:var(--muted)">ENTRY</div><div style="font-size:.76rem;color:var(--white);font-weight:700">$5.90</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">STOP</div><div style="font-size:.76rem;color:var(--red);font-weight:700">$3.84</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">TARGET</div><div style="font-size:.76rem;color:var(--green);font-weight:700">$9.44</div></div>
-            <div><div style="font-size:.52rem;color:var(--muted)">R:R</div><div style="font-size:.76rem;font-weight:700;color:#ffd700">1.7:1</div></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted)">
-            <span>$500·1ct</span><span style="color:var(--red)">max $206</span>
-          </div></div>
-    </div>
+  <!-- FLOW TOOLS -->
+  <div class="card">
+    <span class="lbl">Flow Tools</span>
+    ${TOOLS.map(t=>`<div class="row"><a href="${t.url}" target="_blank" rel="noreferrer" style="font-size:9px;font-weight:500">${t.name}</a><span style="font-size:8px;${cl(TD)}">${t.note}</span></div>`).join("")}
   </div>
 
-  <!-- COL 4: Chain + News -->
-  <div style="display:flex;flex-direction:column;gap:4px">
-    <div class="card" style="padding:7px">
-      <div class="ct">Chain 2026-04-10 (28d) IV42.6%</div>
-      <div style="font-size:.55rem;color:var(--orange);letter-spacing:1px;margin-bottom:2px">CALLS</div>
-      <table style="table-layout:fixed">
-        <colgroup><col style="width:36px"><col style="width:34px"><col style="width:28px"><col style="width:28px"><col></colgroup>
-        <tr><th>STR</th><th>$</th><th>IV</th><th>SPR</th><th>VOL</th></tr>
-        <tr><td style="font-size:.6rem;color:var(--muted)">$160</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$22.98</td><td style="color:var(--orange);font-size:.6rem">52.4%</td><td style="color:#ff3a5e;font-size:.6rem">$0.55</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$165</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$19.46</td><td style="color:var(--orange);font-size:.6rem">49.6%</td><td style="color:#00ff9d;font-size:.6rem">$0.15</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$170</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$15.27</td><td style="color:var(--orange);font-size:.6rem">46.9%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$175</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$11.55</td><td style="color:var(--orange);font-size:.6rem">44.7%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K⚠</td></tr><tr style="background:rgba(255,215,0,.05)"><td style="font-size:.6rem;color:var(--muted)">$180</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$8.70</td><td style="color:var(--orange);font-size:.6rem">42.6%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">1K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$185🎯</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$6.15</td><td style="color:var(--orange);font-size:.6rem">40.7%</td><td style="color:#00ff9d;font-size:.6rem">$0.05</td><td style="color:var(--green-dim);font-size:.56rem">2K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$190🎯</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$4.18</td><td style="color:var(--orange);font-size:.6rem">39.3%</td><td style="color:#00ff9d;font-size:.6rem">$0.05</td><td style="color:var(--green-dim);font-size:.56rem">2K</td></tr>
-      </table>
-      <div style="font-size:.55rem;color:var(--red);letter-spacing:1px;margin:4px 0 2px">PUTS</div>
-      <table style="table-layout:fixed">
-        <colgroup><col style="width:36px"><col style="width:34px"><col style="width:28px"><col style="width:28px"><col></colgroup>
-        <tr><th>STR</th><th>$</th><th>IV</th><th>SPR</th><th>VOL</th></tr>
-        <tr><td style="font-size:.6rem;color:var(--muted)">$185</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$10.45</td><td style="color:var(--orange);font-size:.6rem">38.2%</td><td style="color:#00ff9d;font-size:.6rem">$0.15</td><td style="color:var(--green-dim);font-size:.56rem">4K</td></tr><tr style="background:rgba(255,215,0,.05)"><td style="font-size:.6rem;color:var(--muted)">$180</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$7.91</td><td style="color:var(--orange);font-size:.6rem">39.9%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$175🎯</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$5.90</td><td style="color:var(--orange);font-size:.6rem">41.9%</td><td style="color:#00ff9d;font-size:.6rem">$0.10</td><td style="color:var(--green-dim);font-size:.56rem">0K</td></tr><tr><td style="font-size:.6rem;color:var(--muted)">$170🎯</td><td style="color:var(--white);font-weight:700;font-size:.65rem">$4.39</td><td style="color:var(--orange);font-size:.6rem">43.8%</td><td style="color:#00ff9d;font-size:.6rem">$0.05</td><td style="color:var(--green-dim);font-size:.56rem">2K</td></tr>
-      </table>
-      <div style="margin-top:4px;font-size:.54rem;color:var(--muted)">🎯$3.5–6.5·V>500·OI>1K·Spr&lt;.20</div>
-    </div>
-    <div class="card" style="padding:7px">
-      <div class="ct">News</div>
-      <div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://www.fool.com/investing/2026/03/13/2-tech-stocks-built-to-compound-for-a-decade/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">2 Tech Stocks Built to Compound for a Decade</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 21:50</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://www.fool.com/coverage/stock-market-today/2026/03/13/stock-market-today-march-13-nvidia-slips-as-gtc-2026-conference-looms/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">Stock Market Today, March 13: Nvidia Slips as GTC 2026 Conference Looms</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 21:29</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://www.fool.com/investing/2026/03/13/is-fords-f-150-lightning-erev-the-next-costly-mist/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">Is Ford's F-150 Lightning EREV the Next Costly Mistake?</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 21:25</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#00ff9d;font-weight:700;margin-right:3px">▲</span><a href="https://finance.yahoo.com/news/look-lumentum-holdings-lite-valuation-211346082.html?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">A Look At Lumentum Holdings (LITE) Valuation After Nvidia Investment And S&P 500 Inclusion</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 21:13</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#00ff9d;font-weight:700;margin-right:3px">▲</span><a href="https://www.fool.com/investing/2026/03/13/the-best-3-consumer-staples-stocks-to-buy-and-hold/?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">The Best 3 Consumer Staples Stocks to Buy and Hold for Decades</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 21:13</div></div><div style="padding:4px 0;border-bottom:1px solid rgba(26,51,84,.35)"><div style="font-size:.64rem;line-height:1.3"><span style="color:#ffd700;font-weight:700;margin-right:3px">—</span><a href="https://finance.yahoo.com/m/cb03c9e2-36cb-3935-874a-11f3d5b70bb4/dow-jones-futures%3A-oil.html?.tsrc=rss" target="_blank" style="color:var(--text);text-decoration:none">Dow Jones Futures: Oil Prices, Iran War Drive Stocks Lower; Nvidia GTC, Micron Earnings Due</a></div><div style="font-size:.55rem;color:var(--muted);margin-top:1px">Fri, 13 Mar 2026 20:55</div></div>
-    </div>
-  </div>
+  <!-- SESSION TIMELINE -->
+  <div class="card">
+    <span class="lbl">Session · 9:15–10:30 CT</span>
+    ${[
+      {t:"8:55", a:"Scan",  c:TM, n:"SPY vs $665.24 breakline · set key alerts"},
+      {t:"9:15", a:"Prep",  c:A,  n:"Confirm bias · KAMA 5m direction · Ichimoku"},
+      {t:"9:30", a:"Open",  c:D,  n:"NO entry · watch 3 candles · ORB forming"},
+      {t:"9:45", a:"SIG-A", c:U,  n:"KAMA cross + Ichimoku green → enter 5m close"},
+      {t:"10:00",a:"SIG-B", c:B,  n:"VWAP reclaim/loss · KAMA confirms"},
+      {t:"10:15",a:"SIG-C", c:A,  n:"KAMA re-touch only · ER>0.5 · tighten stops"},
+      {t:"10:30",a:"Close", c:D,  n:"Hard exit all · no exceptions"},
+    ].map(s=>`<div style="display:grid;grid-template-columns:34px 38px 1fr;gap:4px;padding:4px 0;border-bottom:1px solid var(--bd);align-items:flex-start">
+      <span style="font-size:8px;${cl(TM)}">${s.t}</span>
+      <span style="font-size:8px;font-weight:500;${cl(s.c)}">${s.a}</span>
+      <span style="font-size:8px;${cl(TD)};line-height:1.4">${s.n}</span>
+    </div>`).join("")}
+  </div>`;
+}
 
-</div>
-
-<!-- BOTTOM GRID -->
-<div class="g4">
-
-  <div class="card" style="padding:7px">
-    <div class="ct">MTF Bias</div>
-    <table>
-      <tr><th>TF</th><th>TREND</th><th>RSI</th><th>MACD</th><th>BIAS</th><th>VOL</th></tr>
-      <tr><td style="color:var(--white);font-weight:700;font-size:.62rem">DAILY</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ff3a5e;font-size:.62rem">39.3</td><td style="color:#ff3a5e;font-size:.62rem">↓-0.31</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.82x</td></tr><tr><td style="color:var(--white);font-weight:700;font-size:.62rem">4H</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ffd700;font-size:.62rem">45.7</td><td style="color:#00ff9d;font-size:.62rem">↑+0.05</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.58x</td></tr><tr><td style="color:var(--white);font-weight:700;font-size:.62rem">1H</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">BEAR</td><td style="color:#ff3a5e;font-size:.62rem">28.0</td><td style="color:#ff3a5e;font-size:.62rem">↓-0.48</td><td style="color:#ff3a5e;font-weight:700;font-size:.62rem">SHORT</td><td style="color:#ff3a5e;font-size:.6rem">0.91x</td></tr>
-    </table>
-    <div style="margin-top:4px;padding:4px;background:rgba(0,0,0,.15);border:1px solid var(--bd);font-size:.56rem;color:var(--muted)"><strong style="color:var(--yellow)">Size:</strong> 2=$500·3=$750·4=$1000</div>
-  </div>
-
-  <div class="card" style="padding:7px">
-    <div class="ct">Regime</div>
-    <div style="background:rgba(0,0,0,.2);border:1px solid #ff3a5e55;padding:5px;margin-bottom:5px">
-      <div style="font-size:.7rem;font-weight:700;color:#ff3a5e">SPY BEAR✗</div>
-      <div style="font-size:.56rem;color:var(--muted)">$662.29 vs 50EMA $682.63</div>
-    </div>
-    <div style="margin-bottom:4px"><div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:2px"><span>Compression</span><span style="color:#5a7a99;font-weight:700">0.0/100</span></div><div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:0.0%;background:#5a7a99;border-radius:2px"></div></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:3px"><span>ATR(14)</span><span style="color:var(--orange);font-weight:700">$6.29</span></div>
-    <div style="display:flex;justify-content:space-between;font-size:.58rem;margin-bottom:2px"><span>Volume</span><span style="font-weight:700;color:#ffd700">0.89x·156M</span></div>
-    <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:44%;background:#ffd700;border-radius:2px"></div></div>
-    <div style="margin-top:5px;border-top:1px solid var(--bd);padding-top:4px"><div style="font-size:.55rem;color:var(--muted);margin-bottom:2px">1H EMA</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;font-size:.6rem">
-      <div>E8 <strong style="color:var(--blue)">$181.45</strong></div>
-      <div>E21 <strong style="color:var(--blue)">$182.54</strong></div>
-      <div>E50 <strong style="color:var(--blue)">$182.94</strong></div>
-      <div>RSI <strong style="color:var(--blue)">28.0</strong></div>
-    </div></div>
-  </div>
-
-  <div class="card" style="padding:7px">
-    <div class="ct">5m Candles</div>
-    <table>
-      <tr><th>TIME</th><th>$</th><th></th><th>H</th><th>L</th><th>VOL</th></tr>
-      <tr><td style="color:var(--muted);font-size:.58rem">02:20 PM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$180.50</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">180.9</td><td style="color:var(--muted);font-size:.58rem">180.4</td><td style="color:var(--green-dim);font-size:.56rem">1442K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:25 PM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$180.70</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">180.7</td><td style="color:var(--muted);font-size:.58rem">180.3</td><td style="color:var(--green-dim);font-size:.56rem">1712K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:30 PM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$180.56</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">180.8</td><td style="color:var(--muted);font-size:.58rem">180.5</td><td style="color:var(--green-dim);font-size:.56rem">1754K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:35 PM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$180.33</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">180.7</td><td style="color:var(--muted);font-size:.58rem">180.3</td><td style="color:var(--green-dim);font-size:.56rem">1393K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:40 PM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$180.43</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">180.5</td><td style="color:var(--muted);font-size:.58rem">180.2</td><td style="color:var(--green-dim);font-size:.56rem">2079K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:45 PM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$180.43</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">180.6</td><td style="color:var(--muted);font-size:.58rem">180.3</td><td style="color:var(--green-dim);font-size:.56rem">1876K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:50 PM</td><td style="color:#ff3a5e;font-weight:700;font-size:.64rem">$180.25</td><td style="color:#ff3a5e;font-size:.62rem">▼</td><td style="color:var(--muted);font-size:.58rem">180.5</td><td style="color:var(--muted);font-size:.58rem">180.1</td><td style="color:var(--green-dim);font-size:.56rem">2382K</td></tr><tr><td style="color:var(--muted);font-size:.58rem">02:55 PM</td><td style="color:#00ff9d;font-weight:700;font-size:.64rem">$180.26</td><td style="color:#00ff9d;font-size:.62rem">▲</td><td style="color:var(--muted);font-size:.58rem">180.4</td><td style="color:var(--muted);font-size:.58rem">179.9</td><td style="color:var(--green-dim);font-size:.56rem">6852K</td></tr>
-    </table>
-    <div style="margin-top:5px;border-top:1px solid var(--bd);padding-top:4px">
-      <div style="font-size:.55rem;color:var(--muted);margin-bottom:2px">52W (75th pct)</div>
-      <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted);margin-bottom:2px"><span>$87</span><span style="color:var(--white)">$180.25</span><span>$212</span></div>
-      <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:75%;background:var(--blue);border-radius:2px"></div></div>
-    </div>
-  </div>
-
-  <div class="card" style="padding:7px">
-    <div class="ct">v6 Entry Rules</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:5px">
-      <div style="background:rgba(179,157,219,.08);border:1px solid rgba(179,157,219,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#b39ddb">ICHIMOKU</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">PF 4.18</div></div>
-      <div style="background:rgba(124,77,255,.08);border:1px solid rgba(124,77,255,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#7c4dff">KAUFMAN</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">PF 4.34</div></div>
-      <div style="background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.3);padding:3px 4px;text-align:center"><div style="font-size:.5rem;color:#4fc3f7">RSI</div><div style="font-size:.68rem;color:#00ff9d;font-weight:700">77%WR</div></div>
-    </div>
-    <div style="font-size:.6rem;line-height:1.6;color:var(--text)">
-      <span style="color:var(--green)">ENTRY:</span> 2+sigs·Brando·SPY·vol·Power Win<br>
-      <span style="color:var(--yellow)">SIZE:</span> 2=$500·3=$750·4=$1000
-    </div>
-    <div style="margin-top:4px;padding:4px 6px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.3);font-size:.58rem;color:var(--orange);line-height:1.5">EXIT +60%→SELL·-35%→STOP·Day3→OUT·MACD→HALF</div>
-    <div style="margin-top:3px;padding:4px 6px;background:rgba(255,58,94,.05);border:1px solid rgba(255,58,94,.2);font-size:.58rem;color:var(--red);line-height:1.5">NEVER: midday 10:30–1PM·chasing·ignoring vol</div>
-  </div>
-
-</div>
-
-<div style="text-align:center;padding:5px;font-size:.54rem;color:var(--muted);border-top:1px solid var(--bd)">
-  v6·Ichimoku PF4.18·Kaufman PF4.34·RSI 77%WR·@EliteOptions2·⚠️Educational only·Updated <strong style="color:var(--text)">2026-03-13 16:53 CT</strong>
-</div>
-</div>
-</body></html>
+// ─── INIT + AUTO-REFRESH ──────────────────────────────────────────────────────
+render();
+setInterval(render,30000); // refresh every 30s
+</script>
+</body>
+</html>
