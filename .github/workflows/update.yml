@@ -1,21 +1,15 @@
-name: Update Dashboard
+name: Update SPY Dashboard
 
 on:
   schedule:
-    # ── Morning window: 8:55–10:25 AM CT (7 runs, every 15 min) ────────────────
-    # CT = CDT (UTC-5) during daylight saving (Mar–Nov)
-    - cron: '55 13 * * 1-5'   # 08:55 CT
-    - cron: '10 14 * * 1-5'   # 09:10 CT
-    - cron: '25 14 * * 1-5'   # 09:25 CT
-    - cron: '40 14 * * 1-5'   # 09:40 CT
-    - cron: '55 14 * * 1-5'   # 09:55 CT
-    - cron: '10 15 * * 1-5'   # 10:10 CT
-    - cron: '25 15 * * 1-5'   # 10:25 CT
-    # ── Midday / afternoon checks ───────────────────────────────────────────────
-    - cron: '0 16 * * 1-5'    # 11:00 CT
-    - cron: '0 18 * * 1-5'    # 13:00 CT (1 PM)
-    - cron: '0 19 * * 1-5'    # 14:00 CT (2 PM)
-    - cron: '0 20 * * 1-5'    # 15:00 CT (3 PM)
+    # 9:00–10:30 AM CT (CDT = UTC-5), every 15 min, weekdays only
+    - cron: '0 14 * * 1-5'    # 09:00 CT
+    - cron: '15 14 * * 1-5'   # 09:15 CT
+    - cron: '30 14 * * 1-5'   # 09:30 CT
+    - cron: '45 14 * * 1-5'   # 09:45 CT
+    - cron: '0 15 * * 1-5'    # 10:00 CT
+    - cron: '15 15 * * 1-5'   # 10:15 CT
+    - cron: '30 15 * * 1-5'   # 10:30 CT
   workflow_dispatch:
 
 concurrency:
@@ -29,7 +23,6 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 8
-
     steps:
       - uses: actions/checkout@v4
 
@@ -49,10 +42,7 @@ jobs:
 
       - name: Run updater
         run: |
-          for i in 1 2; do
-            python update_dashboard.py && break
-            [ $i -lt 2 ] && sleep 15
-          done
+          python update_dashboard.py || python update_dashboard.py
 
       - name: Commit & push
         run: |
