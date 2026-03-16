@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="refresh" content="1800">
 <title>SPY · OCC</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f1117;--s1:#13161f;--s2:#0f1420;--bd:#1c2030;
-  --green:#4ade80;--green-dim:#22c55e;--red:#f87171;--yellow:#fbbf24;
-  --orange:#fb923c;--blue:#60a5fa;--purple:#a78bfa;--white:#dde3ef;--muted:#4a5568;--text:#8892a4;}
+:root{--bg:#06090f;--s1:#0b1018;--s2:#0d1422;--bd:#192336;
+  --green:#00c87a;--green-dim:#00a060;--red:#cc3d55;--yellow:#c8960a;
+  --orange:#b86030;--blue:#3a7abf;--purple:#7c4dff;--white:#c8d8e8;--muted:#3a5068;--text:#7090a8;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;
+  background-image:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(0,40,100,.06) 0%,transparent 65%)}
 .hdr{border-bottom:1px solid var(--bd);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(15,17,23,.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}
+  background:rgba(6,9,15,.98);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}
 .main{max-width:1440px;margin:0 auto;padding:6px 8px;display:flex;flex-direction:column;gap:5px}
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;align-items:start}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;align-items:start}
@@ -22,7 +23,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospac
   border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:3px}
 .ct::before{content:'';width:3px;height:3px;background:var(--blue);display:block;border-radius:50%;flex-shrink:0}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
-th,td{padding:3px 3px;font-size:.62rem;border-bottom:1px solid rgba(28,32,48,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+th,td{padding:3px 3px;font-size:.62rem;border-bottom:1px solid rgba(25,35,54,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 th{color:var(--muted);font-size:.54rem;letter-spacing:.5px;text-align:left}
 tr:last-child td{border-bottom:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
@@ -36,34 +37,34 @@ tr:last-child td{border-bottom:none}
 <header class="hdr">
   <div style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap">
     <span style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--white);letter-spacing:3px">SPY</span>
-    <span style="font-size:1.1rem;color:#4ade80;font-weight:700">$669.03</span>
-    <span style="font-size:.78rem;color:#4ade80">▲ 6.74 (1.02%)</span>
+    <span style="font-size:1.1rem;color:#00c87a;font-weight:700">$669.03</span>
+    <span style="font-size:.78rem;color:#00c87a">▲ 6.74 (1.02%)</span>
     <span style="font-size:.58rem;color:var(--muted)">ATR$10.24·52W$482–$698</span>
-    <span style="font-size:.55rem;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:#60a5fa;padding:2px 6px;font-weight:700">OCC v1</span>
+    <span style="font-size:.55rem;background:rgba(58,122,191,.08);border:1px solid rgba(58,122,191,.25);color:#3a7abf;padding:2px 6px;font-weight:700">OCC v1</span>
   </div>
   <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-    <span style="font-size:.66rem;color:#fbbf24;font-weight:700">WAIT</span>
+    <span style="font-size:.66rem;color:#c8960a;font-weight:700">WAIT</span>
     <span style="font-size:.64rem;color:var(--yellow)"><span class="dot" style="background:var(--yellow);margin-right:2px"></span>DEAD ZONE</span>
-    <span style="font-size:.62rem;color:#4a5568">Mar 16·06:16 PM CT</span>
+    <span style="font-size:.62rem;color:#3a5068">Mar 16·06:56 PM CT</span>
   </div>
 </header>
 
 <div class="main">
-<div style="background:rgba(251,191,36,.1);border:1px solid #fbbf24;padding:5px 14px;font-size:.68rem;color:#fbbf24;font-weight:700;text-align:center">⚡ ON LEVEL: $668.00 — BEAR ENTRY ZONE (DY)</div>
+<div style="background:rgba(200,150,10,.08);border:1px solid #a07a0866;padding:5px 14px;font-size:.68rem;color:#c8960a;font-weight:700;text-align:center">⚡ ON LEVEL: $668.00 — BEAR ENTRY ZONE (DY)</div>
 
 <!-- SESSION BAR -->
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">08:00 CT</div><div style="font-size:.6rem;font-weight:700;color:#4a5568;white-space:nowrap">PRE-MKT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">09:15 CT</div><div style="font-size:.6rem;font-weight:700;color:#4a5568;white-space:nowrap">FAKE-OUT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">09:45 CT</div><div style="font-size:.6rem;font-weight:700;color:#4a5568;white-space:nowrap">ORB WINDOW</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">10:30 CT</div><div style="font-size:.6rem;font-weight:700;color:#4a5568;white-space:nowrap">HARD CUTOFF</div></div><div style="background:#4a556820;border:1px solid #4a556899;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">10:31 CT</div><div style="font-size:.6rem;font-weight:700;color:#4a5568;white-space:nowrap">DEAD ZONE</div><div style="font-size:.5rem;color:#4a5568">●NOW</div></div></div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">08:00 CT</div><div style="font-size:.6rem;font-weight:700;color:#3a5068;white-space:nowrap">PRE-MKT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">09:15 CT</div><div style="font-size:.6rem;font-weight:700;color:#3a5068;white-space:nowrap">FAKE-OUT</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">09:45 CT</div><div style="font-size:.6rem;font-weight:700;color:#3a5068;white-space:nowrap">ORB WINDOW</div></div><div style="background:rgba(255,255,255,.018);border:1px solid #1c2030;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">10:30 CT</div><div style="font-size:.6rem;font-weight:700;color:#3a5068;white-space:nowrap">HARD CUTOFF</div></div><div style="background:#3a506820;border:1px solid #3a506899;padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">10:31 CT</div><div style="font-size:.6rem;font-weight:700;color:#3a5068;white-space:nowrap">DEAD ZONE</div><div style="font-size:.5rem;color:#3a5068">●NOW</div></div></div>
 
 <!-- VERDICT + SIGNAL GATES -->
 <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:5px">
-  <div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid #4a5568;background:linear-gradient(135deg,rgba(19,22,31,.97),rgba(15,20,32,.97))">
-    <div style="font-size:.53rem;color:var(--muted);letter-spacing:1px;margin-bottom:2px">SIGNAL · 06:16 PM CT</div>
-    <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#4a5568;line-height:1.2">⏸ DEAD ZONE — NO NEW TRADES</div>
+  <div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid #3a5068;background:linear-gradient(135deg,rgba(11,16,24,.98),rgba(13,20,34,.98))">
+    <div style="font-size:.53rem;color:var(--muted);letter-spacing:1px;margin-bottom:2px">SIGNAL · 06:56 PM CT</div>
+    <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#3a5068;line-height:1.2">⏸ DEAD ZONE — NO NEW TRADES</div>
     <div style="font-size:.66rem;color:var(--text);margin-top:3px;line-height:1.45">No new entries after 10:30 CT.</div>
-    <div style="margin-top:4px;padding:5px 7px;background:rgba(255,255,255,.025);border-left:2px solid #4a5568;font-size:.68rem;color:var(--white)">Next window: ORB 9:45–10:30 AM CT.</div>
+    <div style="margin-top:4px;padding:5px 7px;background:rgba(255,255,255,.025);border-left:2px solid #3a5068;font-size:.68rem;color:var(--white)">Next window: ORB 9:45–10:30 AM CT.</div>
     <div style="margin-top:5px">
       <div style="font-size:.52rem;color:var(--muted);letter-spacing:1px;margin-bottom:3px">GATES 5/8</div>
-      <div class="gates"><div style="background:rgba(74,222,128,.07);border:1px solid #4ade8033;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#4ade80;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#8892a4">KAMA</span></div><div style="background:rgba(248,113,113,.05);border:1px solid #f8717133;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#f87171;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#8892a4">RSI</span></div><div style="background:rgba(248,113,113,.05);border:1px solid #f8717133;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#f87171;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#8892a4">MACD</span></div><div style="background:rgba(74,222,128,.07);border:1px solid #4ade8033;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#4ade80;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#8892a4">VWAP</span></div><div style="background:rgba(74,222,128,.07);border:1px solid #4ade8033;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#4ade80;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#8892a4">RVOL</span></div><div style="background:rgba(74,222,128,.07);border:1px solid #4ade8033;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#4ade80;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#8892a4">ADX</span></div><div style="background:rgba(74,222,128,.07);border:1px solid #4ade8033;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#4ade80;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#8892a4">ER</span></div><div style="background:rgba(248,113,113,.05);border:1px solid #f8717133;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#f87171;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#8892a4">SESSION</span></div></div>
+      <div class="gates"><div style="background:rgba(0,200,122,.06);border:1px solid #00c87a2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#00c87a;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#7090a8">KAMA</span></div><div style="background:rgba(204,61,85,.04);border:1px solid #cc3d552a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#cc3d55;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#7090a8">RSI</span></div><div style="background:rgba(204,61,85,.04);border:1px solid #cc3d552a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#cc3d55;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#7090a8">MACD</span></div><div style="background:rgba(0,200,122,.06);border:1px solid #00c87a2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#00c87a;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#7090a8">VWAP</span></div><div style="background:rgba(0,200,122,.06);border:1px solid #00c87a2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#00c87a;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#7090a8">RVOL</span></div><div style="background:rgba(0,200,122,.06);border:1px solid #00c87a2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#00c87a;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#7090a8">ADX</span></div><div style="background:rgba(0,200,122,.06);border:1px solid #00c87a2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#00c87a;font-size:.7rem">✓</span><span style="font-size:.56rem;color:#7090a8">ER</span></div><div style="background:rgba(204,61,85,.04);border:1px solid #cc3d552a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:#cc3d55;font-size:.7rem">✗</span><span style="font-size:.56rem;color:#7090a8">SESSION</span></div></div>
     </div>
   </div>
   <div style="padding:8px 10px;border:1px solid var(--bd);background:var(--s1)">
@@ -89,63 +90,63 @@ tr:last-child td{border-bottom:none}
   <div style="display:flex;flex-direction:column;gap:4px">
     <div class="card">
       <div class="ct">5m Signals (HLC3/KAMA Primary)</div>
-      <div style="background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.3);padding:5px 7px;margin-bottom:4px">
+      <div style="background:rgba(204,61,85,.06);border:1px solid rgba(204,61,85,.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
-        <span style="font-size:.56rem;color:#f87171;font-weight:700">KAMA/HLC3</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">PF 7.15 5m</span>
+        <span style="font-size:.56rem;color:#cc3d55;font-weight:700">KAMA/HLC3</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">PF 7.15 5m</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">✅ ✅ BEAR</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">HLC3 668.94 < KAMA 669.41 · ↓</div>
+      <div style="font-size:.62rem;color:#7090a8">✅ ✅ BEAR</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">HLC3 668.94 < KAMA 669.41 · ↓</div>
     </div>
-      <div style="background:rgba(74,85,104,.07);border:1px solid rgba(74,85,104,.3);padding:5px 7px;margin-bottom:4px">
+      <div style="background:rgba(58,80,104,.06);border:1px solid rgba(58,80,104,.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
-        <span style="font-size:.56rem;color:#4a5568;font-weight:700">ICHIMOKU</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">1H confirm</span>
+        <span style="font-size:.56rem;color:#3a5068;font-weight:700">ICHIMOKU</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">1H confirm</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">⏸ ⏸ IN CLOUD</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">$667.89–$672.36</div>
+      <div style="font-size:.62rem;color:#7090a8">⏸ ⏸ IN CLOUD</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">$667.89–$672.36</div>
     </div>
-      <div style="background:rgba(74,85,104,.07);border:1px solid rgba(74,85,104,.3);padding:5px 7px;margin-bottom:4px">
+      <div style="background:rgba(58,80,104,.06);border:1px solid rgba(58,80,104,.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
-        <span style="font-size:.56rem;color:#4a5568;font-weight:700">RSI</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">Trebor_Namor</span>
+        <span style="font-size:.56rem;color:#3a5068;font-weight:700">RSI</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">Trebor_Namor</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">⏸ ⏸ MID</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">RSI 40.4 — wait 50 cross</div>
+      <div style="font-size:.62rem;color:#7090a8">⏸ ⏸ MID</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">RSI 40.4 — wait 50 cross</div>
     </div>
-      <div style="background:rgba(74,85,104,.07);border:1px solid rgba(74,85,104,.3);padding:5px 7px;margin-bottom:4px">
+      <div style="background:rgba(58,80,104,.06);border:1px solid rgba(58,80,104,.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
-        <span style="font-size:.56rem;color:#4a5568;font-weight:700">MACD</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">MarcoValente</span>
+        <span style="font-size:.56rem;color:#3a5068;font-weight:700">MACD</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">MarcoValente</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">⏸ ⏸ WAIT</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">MACD -0.1454 · RSI 40</div>
+      <div style="font-size:.62rem;color:#7090a8">⏸ ⏸ WAIT</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">MACD -0.1454 · RSI 40</div>
     </div>
-      <div style="background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.3);padding:5px 7px;margin-bottom:4px">
+      <div style="background:rgba(0,200,122,.06);border:1px solid rgba(0,200,122,.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
-        <span style="font-size:.56rem;color:#4ade80;font-weight:700">VWAP</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">session</span>
+        <span style="font-size:.56rem;color:#00c87a;font-weight:700">VWAP</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">session</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">✅ ✅ ABOVE</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">$668.96 > VWAP $667.23</div>
+      <div style="font-size:.62rem;color:#7090a8">✅ ✅ ABOVE</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">$668.96 > VWAP $667.23</div>
     </div>
     </div>
     <div class="card">
       <div class="ct">Signal Breakdown</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:5px">
-        <div style="border:1px solid #4ade8044;padding:4px 7px;text-align:center">
+        <div style="border:1px solid #00c87a2a;padding:4px 7px;text-align:center">
           <div style="font-size:.5rem;color:var(--muted)">CALL</div>
-          <div style="font-size:1.1rem;color:#4ade80;font-weight:700">1/5</div>
+          <div style="font-size:1.1rem;color:#00c87a;font-weight:700">1/5</div>
         </div>
-        <div style="border:1px solid #f8717144;padding:4px 7px;text-align:center">
+        <div style="border:1px solid #cc3d552a;padding:4px 7px;text-align:center">
           <div style="font-size:.5rem;color:var(--muted)">PUT</div>
-          <div style="font-size:1.1rem;color:#f87171;font-weight:700">1/5</div>
+          <div style="font-size:1.1rem;color:#cc3d55;font-weight:700">1/5</div>
         </div>
       </div>
       <div style="font-size:.58rem;color:var(--muted);letter-spacing:1px;margin-bottom:3px">CALL REASONS</div>
-      <div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ KAMA/HLC3: HLC3 668.94 < KAMA 669.41 · ↓</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ ICHIMOKU: $667.89–$672.36</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ RSI: RSI 40.4 — wait 50 cross</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ MACD: MACD -0.1454 · RSI 40</div><div style="font-size:.58rem;color:#4ade80;line-height:1.5;padding:1px 0">✅ VWAP: $668.96 > VWAP $667.23</div>
+      <div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ KAMA/HLC3: HLC3 668.94 < KAMA 669.41 · ↓</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ ICHIMOKU: $667.89–$672.36</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ RSI: RSI 40.4 — wait 50 cross</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ MACD: MACD -0.1454 · RSI 40</div><div style="font-size:.58rem;color:#00c87a;line-height:1.5;padding:1px 0">✅ VWAP: $668.96 > VWAP $667.23</div>
       <div style="font-size:.58rem;color:var(--muted);letter-spacing:1px;margin:4px 0 3px">PUT REASONS</div>
-      <div style="font-size:.58rem;color:#4ade80;line-height:1.5;padding:1px 0">✅ KAMA/HLC3: HLC3 668.94 < KAMA 669.41 · ↓</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ ICHIMOKU: $667.89–$672.36</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ RSI: RSI 40.4 — wait 50 cross</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ MACD: MACD -0.1454 · RSI 40</div><div style="font-size:.58rem;color:#f87171;line-height:1.5;padding:1px 0">❌ VWAP: $668.96 > VWAP $667.23</div>
+      <div style="font-size:.58rem;color:#00c87a;line-height:1.5;padding:1px 0">✅ KAMA/HLC3: HLC3 668.94 < KAMA 669.41 · ↓</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ ICHIMOKU: $667.89–$672.36</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ RSI: RSI 40.4 — wait 50 cross</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ MACD: MACD -0.1454 · RSI 40</div><div style="font-size:.58rem;color:#cc3d55;line-height:1.5;padding:1px 0">❌ VWAP: $668.96 > VWAP $667.23</div>
     </div>
   </div>
 
@@ -154,116 +155,116 @@ tr:last-child td{border-bottom:none}
     <div class="card">
       <div class="ct">S/R Levels · @EliteOptions2</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:5px">
-        <div style="padding:4px 6px;background:rgba(74,222,128,.05);border:1px solid #4ade8033">
+        <div style="padding:4px 6px;background:rgba(0,200,122,.04);border:1px solid #00c87a22">
           <div style="font-size:.52rem;color:var(--muted)">SUPPORT ↓</div>
-          <div style="font-size:.78rem;color:#4ade80;font-weight:700">$638.60</div>
+          <div style="font-size:.78rem;color:#00c87a;font-weight:700">$638.60</div>
           <div style="font-size:.54rem;color:var(--muted)">Monthly Floor</div>
         </div>
-        <div style="padding:4px 6px;background:rgba(248,113,113,.05);border:1px solid #f8717133">
+        <div style="padding:4px 6px;background:rgba(204,61,85,.04);border:1px solid #cc3d5522">
           <div style="font-size:.52rem;color:var(--muted)">RESIST ↑</div>
-          <div style="font-size:.78rem;color:#f87171;font-weight:700">$702.40</div>
+          <div style="font-size:.78rem;color:#cc3d55;font-weight:700">$702.40</div>
           <div style="font-size:.54rem;color:var(--muted)">Monthly Wall $7T</div>
         </div>
       </div>
       <table>
         <tr><th>LABEL</th><th>TF</th><th>$</th><th>DIST</th></tr>
-        <tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Monthly Wall $7T</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$702.40</td>
-          <td style="color:#f87171;font-size:.58rem">-33.37</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">Monthly R1</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$688.00</td>
-          <td style="color:#f87171;font-size:.58rem">-18.97</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">Monthly S/R</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$683.10</td>
-          <td style="color:#f87171;font-size:.58rem">-14.07</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Weekly Long Target</td>
-          <td style="color:#4a5568;font-size:.6rem">WK</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$677.90</td>
-          <td style="color:#f87171;font-size:.58rem">-8.87</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Bull Entry Zone</td>
-          <td style="color:#4a5568;font-size:.6rem">DY</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$673.40</td>
-          <td style="color:#f87171;font-size:.58rem">-4.37</td>
-        </tr><tr style="background:#60a5fa08;border-left:2px solid #60a5fa;">
-          <td style="color:#dde3ef;font-size:.6rem">★ Key Pivot (Yellow Line)</td>
-          <td style="color:#dde3ef;font-size:.6rem">DY</td>
-          <td style="color:#60a5fa;font-weight:700;font-size:.64rem">$671.00</td>
-          <td style="color:#f87171;font-size:.58rem">-1.97</td>
-        </tr><tr style="background:#60a5fa08;border-left:2px solid #60a5fa;">
-          <td style="color:#dde3ef;font-size:.6rem">★ Bear Entry Zone</td>
-          <td style="color:#dde3ef;font-size:.6rem">DY</td>
-          <td style="color:#60a5fa;font-weight:700;font-size:.64rem">$668.00</td>
-          <td style="color:#4ade80;font-size:.58rem">+1.03</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Weekly Short Target</td>
-          <td style="color:#4a5568;font-size:.6rem">WK</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$664.40</td>
-          <td style="color:#4ade80;font-size:.58rem">+4.63</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Critical Support</td>
-          <td style="color:#4a5568;font-size:.6rem">DY</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$660.10</td>
-          <td style="color:#4ade80;font-size:.58rem">+8.93</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">Daily S1</td>
-          <td style="color:#4a5568;font-size:.6rem">DY</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$658.20</td>
-          <td style="color:#4ade80;font-size:.58rem">+10.83</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">Weekly S1</td>
-          <td style="color:#4a5568;font-size:.6rem">WK</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$655.00</td>
-          <td style="color:#4ade80;font-size:.58rem">+14.03</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Monthly Demand</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$651.60</td>
-          <td style="color:#4ade80;font-size:.58rem">+17.43</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Major Monthly Floor</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$640.60</td>
-          <td style="color:#4ade80;font-size:.58rem">+28.43</td>
-        </tr><tr style="border-left:2px solid #1c2030;">
-          <td style="color:#4a5568;font-size:.6rem">★ Monthly Floor</td>
-          <td style="color:#4a5568;font-size:.6rem">MO</td>
-          <td style="color:#8892a4;font-weight:400;font-size:.64rem">$638.60</td>
-          <td style="color:#4ade80;font-size:.58rem">+30.43</td>
+        <tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Monthly Wall $7T</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$702.40</td>
+          <td style="color:#cc3d55;font-size:.58rem">-33.37</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">Monthly R1</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$688.00</td>
+          <td style="color:#cc3d55;font-size:.58rem">-18.97</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">Monthly S/R</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$683.10</td>
+          <td style="color:#cc3d55;font-size:.58rem">-14.07</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Weekly Long Target</td>
+          <td style="color:#3a5068;font-size:.6rem">WK</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$677.90</td>
+          <td style="color:#cc3d55;font-size:.58rem">-8.87</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Bull Entry Zone</td>
+          <td style="color:#3a5068;font-size:.6rem">DY</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$673.40</td>
+          <td style="color:#cc3d55;font-size:.58rem">-4.37</td>
+        </tr><tr style="background:#3060a008;border-left:2px solid #3060a0;">
+          <td style="color:#c8d8e8;font-size:.6rem">★ Key Pivot (Yellow Line)</td>
+          <td style="color:#c8d8e8;font-size:.6rem">DY</td>
+          <td style="color:#3060a0;font-weight:700;font-size:.64rem">$671.00</td>
+          <td style="color:#cc3d55;font-size:.58rem">-1.97</td>
+        </tr><tr style="background:#3060a008;border-left:2px solid #3060a0;">
+          <td style="color:#c8d8e8;font-size:.6rem">★ Bear Entry Zone</td>
+          <td style="color:#c8d8e8;font-size:.6rem">DY</td>
+          <td style="color:#3060a0;font-weight:700;font-size:.64rem">$668.00</td>
+          <td style="color:#00c87a;font-size:.58rem">+1.03</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Weekly Short Target</td>
+          <td style="color:#3a5068;font-size:.6rem">WK</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$664.40</td>
+          <td style="color:#00c87a;font-size:.58rem">+4.63</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Critical Support</td>
+          <td style="color:#3a5068;font-size:.6rem">DY</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$660.10</td>
+          <td style="color:#00c87a;font-size:.58rem">+8.93</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">Daily S1</td>
+          <td style="color:#3a5068;font-size:.6rem">DY</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$658.20</td>
+          <td style="color:#00c87a;font-size:.58rem">+10.83</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">Weekly S1</td>
+          <td style="color:#3a5068;font-size:.6rem">WK</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$655.00</td>
+          <td style="color:#00c87a;font-size:.58rem">+14.03</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Monthly Demand</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$651.60</td>
+          <td style="color:#00c87a;font-size:.58rem">+17.43</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Major Monthly Floor</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$640.60</td>
+          <td style="color:#00c87a;font-size:.58rem">+28.43</td>
+        </tr><tr style="border-left:2px solid #192336;">
+          <td style="color:#3a5068;font-size:.6rem">★ Monthly Floor</td>
+          <td style="color:#3a5068;font-size:.6rem">MO</td>
+          <td style="color:#7090a8;font-weight:400;font-size:.64rem">$638.60</td>
+          <td style="color:#00c87a;font-size:.58rem">+30.43</td>
         </tr>
       </table>
     </div>
     <div class="card">
       <div class="ct">Regime</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:.6rem">
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">200-Day MA</div>
-          <div style="color:#4ade80;font-weight:700">$655.45 ✓</div>
+          <div style="color:#00c87a;font-weight:700">$655.45 ✓</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">50-Day MA</div>
-          <div style="color:#f87171;font-weight:700">$681.93 ✗</div>
+          <div style="color:#cc3d55;font-weight:700">$681.93 ✗</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ADX (5m)</div>
-          <div style="color:#4ade80;font-weight:700">31.2 Strong</div>
+          <div style="color:#00c87a;font-weight:700">31.2 Strong</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">RVOL</div>
-          <div style="color:#4ade80;font-weight:700">1.99x ✓</div>
+          <div style="color:#00c87a;font-weight:700">1.99x ✓</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ER (Kaufman)</div>
-          <div style="color:#4ade80;font-weight:700">0.764 Trend</div>
+          <div style="color:#00c87a;font-weight:700">0.764 Trend</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ATR (daily)</div>
           <div style="color:var(--orange);font-weight:700">$10.24</div>
         </div>
@@ -278,125 +279,125 @@ tr:last-child td{border-bottom:none}
       <div style="font-size:.55rem;color:var(--green);letter-spacing:1px;margin-bottom:2px">CALLS</div>
       <table>
         <tr><th>STR</th><th>MID</th><th>SPR</th><th>VOL</th><th>OI</th><th>Δ</th></tr>
-        <tr style="background:rgba(251,191,36,.07);">
-          <td style="color:#4ade80;font-weight:700;">$669 <span style="color:#fbbf24;font-size:.5rem">ATM</span></td>
-          <td style="color:#dde3ef;font-weight:600">$4.59</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">8,005</td>
-          <td style="color:#fbbf24">1,654</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+        <tr style="background:rgba(200,150,10,.06);">
+          <td style="color:#00c87a;font-weight:700;">$669 <span style="color:#c8960a;font-size:.5rem">ATM</span></td>
+          <td style="color:#c8d8e8;font-weight:600">$4.59</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">8,005</td>
+          <td style="color:#c8960a">1,654</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#4ade80;">$670</td>
-          <td style="color:#dde3ef;font-weight:600">$4.02</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">15,085</td>
-          <td style="color:#fbbf24">3,977</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#00c87a;">$670</td>
+          <td style="color:#c8d8e8;font-weight:600">$4.02</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">15,085</td>
+          <td style="color:#c8960a">3,977</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#4ade80;font-weight:700;">$668</td>
-          <td style="color:#dde3ef;font-weight:600">$5.19</td>
-          <td style="color:#4ade80;">$0.06</td>
-          <td style="color:#4ade80">5,027</td>
-          <td style="color:#4a5568">591</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#00c87a;font-weight:700;">$668</td>
+          <td style="color:#c8d8e8;font-weight:600">$5.19</td>
+          <td style="color:#00c87a;">$0.06</td>
+          <td style="color:#00c87a">5,027</td>
+          <td style="color:#3a5068">591</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#4ade80;">$671</td>
-          <td style="color:#dde3ef;font-weight:600">$3.48</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">7,641</td>
-          <td style="color:#fbbf24">1,847</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#00c87a;">$671</td>
+          <td style="color:#c8d8e8;font-weight:600">$3.48</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">7,641</td>
+          <td style="color:#c8960a">1,847</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#4ade80;font-weight:700;">$667</td>
-          <td style="color:#dde3ef;font-weight:600">$5.83</td>
-          <td style="color:#fbbf24;">$0.09</td>
-          <td style="color:#4ade80">1,662</td>
-          <td style="color:#4a5568">919</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#00c87a;font-weight:700;">$667</td>
+          <td style="color:#c8d8e8;font-weight:600">$5.83</td>
+          <td style="color:#c8960a;">$0.09</td>
+          <td style="color:#00c87a">1,662</td>
+          <td style="color:#3a5068">919</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#4ade80;">$672</td>
-          <td style="color:#dde3ef;font-weight:600">$2.98</td>
-          <td style="color:#4ade80;">$0.03</td>
-          <td style="color:#4ade80">7,440</td>
-          <td style="color:#fbbf24">1,110</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#00c87a;">$672</td>
+          <td style="color:#c8d8e8;font-weight:600">$2.98</td>
+          <td style="color:#00c87a;">$0.03</td>
+          <td style="color:#00c87a">7,440</td>
+          <td style="color:#c8960a">1,110</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr>
       </table>
       <div style="font-size:.55rem;color:var(--red);letter-spacing:1px;margin:5px 0 2px">PUTS</div>
       <table>
         <tr><th>STR</th><th>MID</th><th>SPR</th><th>VOL</th><th>OI</th><th>Δ</th></tr>
-        <tr style="background:rgba(251,191,36,.07);">
-          <td style="color:#f87171;">$669 <span style="color:#fbbf24;font-size:.5rem">ATM</span></td>
-          <td style="color:#dde3ef;font-weight:600">$4.16</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">13,509</td>
-          <td style="color:#4a5568">599</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+        <tr style="background:rgba(200,150,10,.06);">
+          <td style="color:#cc3d55;">$669 <span style="color:#c8960a;font-size:.5rem">ATM</span></td>
+          <td style="color:#c8d8e8;font-weight:600">$4.16</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">13,509</td>
+          <td style="color:#3a5068">599</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#f87171;font-weight:700;">$670</td>
-          <td style="color:#dde3ef;font-weight:600">$4.59</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">11,252</td>
-          <td style="color:#fbbf24">2,331</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#cc3d55;font-weight:700;">$670</td>
+          <td style="color:#c8d8e8;font-weight:600">$4.59</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">11,252</td>
+          <td style="color:#c8960a">2,331</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#f87171;">$668</td>
-          <td style="color:#dde3ef;font-weight:600">$3.76</td>
-          <td style="color:#4ade80;">$0.04</td>
-          <td style="color:#4ade80">14,775</td>
-          <td style="color:#fbbf24">1,196</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#cc3d55;">$668</td>
+          <td style="color:#c8d8e8;font-weight:600">$3.76</td>
+          <td style="color:#00c87a;">$0.04</td>
+          <td style="color:#00c87a">14,775</td>
+          <td style="color:#c8960a">1,196</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#f87171;font-weight:700;">$671</td>
-          <td style="color:#dde3ef;font-weight:600">$5.06</td>
-          <td style="color:#f87171;">$0.23</td>
-          <td style="color:#4ade80">4,681</td>
-          <td style="color:#4a5568">857</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#cc3d55;font-weight:700;">$671</td>
+          <td style="color:#c8d8e8;font-weight:600">$5.06</td>
+          <td style="color:#cc3d55;">$0.23</td>
+          <td style="color:#00c87a">4,681</td>
+          <td style="color:#3a5068">857</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#f87171;">$667</td>
-          <td style="color:#dde3ef;font-weight:600">$3.40</td>
-          <td style="color:#4ade80;">$0.03</td>
-          <td style="color:#4ade80">6,727</td>
-          <td style="color:#4a5568">692</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#cc3d55;">$667</td>
+          <td style="color:#c8d8e8;font-weight:600">$3.40</td>
+          <td style="color:#00c87a;">$0.03</td>
+          <td style="color:#00c87a">6,727</td>
+          <td style="color:#3a5068">692</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr><tr style="">
-          <td style="color:#f87171;font-weight:700;">$672</td>
-          <td style="color:#dde3ef;font-weight:600">$5.56</td>
-          <td style="color:#f87171;">$0.23</td>
-          <td style="color:#4ade80">1,753</td>
-          <td style="color:#4a5568">887</td>
-          <td style="color:#60a5fa">Δ0.50</td>
+          <td style="color:#cc3d55;font-weight:700;">$672</td>
+          <td style="color:#c8d8e8;font-weight:600">$5.56</td>
+          <td style="color:#cc3d55;">$0.23</td>
+          <td style="color:#00c87a">1,753</td>
+          <td style="color:#3a5068">887</td>
+          <td style="color:#3a7abf">Δ0.50</td>
         </tr>
       </table>
       <div style="margin-top:4px;font-size:.54rem;color:var(--muted)">🎯 ATM±1 · Δ0.42–0.52 · Vol&gt;500 · OI&gt;1K · Spr&lt;.08</div>
     </div>
     <div class="card">
       <div class="ct">News</div>
-      <div style="padding:5px 7px;border-left:2px solid #60a5fa44;background:rgba(255,255,255,.015);margin-bottom:4px">
+      <div style="padding:5px 7px;border-left:2px solid #3a7abf44;background:rgba(255,255,255,.012);margin-bottom:4px">
           <div style="display:flex;gap:5px;align-items:center;margin-bottom:2px">
-            <span style="font-size:.54rem;color:#4a5568">02:56 PM</span>
-            <span style="font-size:.52rem;color:#60a5fa;background:#60a5fa14;padding:1px 4px;font-weight:600">MARKET</span>
+            <span style="font-size:.54rem;color:#3a5068">02:56 PM</span>
+            <span style="font-size:.52rem;color:#3a7abf;background:#3a7abf14;padding:1px 4px;font-weight:600">MARKET</span>
           </div>
-          <div style="font-size:.62rem;color:#8892a4;line-height:1.45">Neocloud Stocks Skyrocket: Why IREN, CoreWeave, and MARA Holdings Are Rallying</div>
-        </div><div style="padding:5px 7px;border-left:2px solid #60a5fa44;background:rgba(255,255,255,.015);margin-bottom:4px">
+          <div style="font-size:.62rem;color:#7090a8;line-height:1.45">Neocloud Stocks Skyrocket: Why IREN, CoreWeave, and MARA Holdings Are Rallying</div>
+        </div><div style="padding:5px 7px;border-left:2px solid #3a7abf44;background:rgba(255,255,255,.012);margin-bottom:4px">
           <div style="display:flex;gap:5px;align-items:center;margin-bottom:2px">
-            <span style="font-size:.54rem;color:#4a5568">11:33 AM</span>
-            <span style="font-size:.52rem;color:#60a5fa;background:#60a5fa14;padding:1px 4px;font-weight:600">MARKET</span>
+            <span style="font-size:.54rem;color:#3a5068">11:33 AM</span>
+            <span style="font-size:.52rem;color:#3a7abf;background:#3a7abf14;padding:1px 4px;font-weight:600">MARKET</span>
           </div>
-          <div style="font-size:.62rem;color:#8892a4;line-height:1.45">Spring Seasonality and AI Productivity Gains Set to Boost Stocks</div>
-        </div><div style="padding:5px 7px;border-left:2px solid #60a5fa44;background:rgba(255,255,255,.015);margin-bottom:4px">
+          <div style="font-size:.62rem;color:#7090a8;line-height:1.45">Spring Seasonality and AI Productivity Gains Set to Boost Stocks</div>
+        </div><div style="padding:5px 7px;border-left:2px solid #3a7abf44;background:rgba(255,255,255,.012);margin-bottom:4px">
           <div style="display:flex;gap:5px;align-items:center;margin-bottom:2px">
-            <span style="font-size:.54rem;color:#4a5568">10:28 AM</span>
-            <span style="font-size:.52rem;color:#60a5fa;background:#60a5fa14;padding:1px 4px;font-weight:600">MARKET</span>
+            <span style="font-size:.54rem;color:#3a5068">10:28 AM</span>
+            <span style="font-size:.52rem;color:#3a7abf;background:#3a7abf14;padding:1px 4px;font-weight:600">MARKET</span>
           </div>
-          <div style="font-size:.62rem;color:#8892a4;line-height:1.45">Cherry Hill’s 15.4% Yield Looks Tempting, But a String of Dividend Cuts Tells a Cautionary Tale</div>
-        </div><div style="padding:5px 7px;border-left:2px solid #60a5fa44;background:rgba(255,255,255,.015);margin-bottom:4px">
+          <div style="font-size:.62rem;color:#7090a8;line-height:1.45">Cherry Hill’s 15.4% Yield Looks Tempting, But a String of Dividend Cuts Tells a Cautionary Tale</div>
+        </div><div style="padding:5px 7px;border-left:2px solid #3a7abf44;background:rgba(255,255,255,.012);margin-bottom:4px">
           <div style="display:flex;gap:5px;align-items:center;margin-bottom:2px">
-            <span style="font-size:.54rem;color:#4a5568">08:00 AM</span>
-            <span style="font-size:.52rem;color:#60a5fa;background:#60a5fa14;padding:1px 4px;font-weight:600">MARKET</span>
+            <span style="font-size:.54rem;color:#3a5068">08:00 AM</span>
+            <span style="font-size:.52rem;color:#3a7abf;background:#3a7abf14;padding:1px 4px;font-weight:600">MARKET</span>
           </div>
-          <div style="font-size:.62rem;color:#8892a4;line-height:1.45">This Schwab ETF Holds 100 Dividend Stocks, Charges $6 a Year, and Yields More Than Most Savings Accounts</div>
+          <div style="font-size:.62rem;color:#7090a8;line-height:1.45">This Schwab ETF Holds 100 Dividend Stocks, Charges $6 a Year, and Yields More Than Most Savings Accounts</div>
         </div>
     </div>
   </div>
@@ -409,56 +410,56 @@ tr:last-child td{border-bottom:none}
         <tr><th>TF</th><th>BIAS</th><th>K</th><th>R</th><th>M</th><th>V</th><th>VOL</th><th>◎</th></tr>
         <tr><td colspan="8" style="font-size:.52rem;color:var(--muted);padding:2px 0">K=KAMA · R=RSI · M=MACD · V=VWAP · Need 4+TFs≥3/4</td></tr>
         <tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">1H</td>
-      <td style="color:#4ade80;font-weight:700;font-size:.62rem">BULL</td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td style="color:#4ade80;font-weight:700;font-size:.68rem">3/4</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">1H</td>
+      <td style="color:#00c87a;font-weight:700;font-size:.62rem">BULL</td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td style="color:#00c87a;font-weight:700;font-size:.68rem">3/4</td>
     </tr><tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">30m</td>
-      <td style="color:#4ade80;font-weight:700;font-size:.62rem">BULL</td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td style="color:#4ade80;font-weight:700;font-size:.68rem">3/4</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">30m</td>
+      <td style="color:#00c87a;font-weight:700;font-size:.62rem">BULL</td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td style="color:#00c87a;font-weight:700;font-size:.68rem">3/4</td>
     </tr><tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">15m</td>
-      <td style="color:#f87171;font-weight:700;font-size:.62rem">BEAR</td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td style="color:#f87171;font-weight:700;font-size:.68rem">1/4</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">15m</td>
+      <td style="color:#cc3d55;font-weight:700;font-size:.62rem">BEAR</td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td style="color:#cc3d55;font-weight:700;font-size:.68rem">1/4</td>
     </tr><tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">5m</td>
-      <td style="color:#f87171;font-weight:700;font-size:.62rem">BEAR</td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td style="color:#f87171;font-weight:700;font-size:.68rem">1/4</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">5m</td>
+      <td style="color:#cc3d55;font-weight:700;font-size:.62rem">BEAR</td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td style="color:#cc3d55;font-weight:700;font-size:.68rem">1/4</td>
     </tr><tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">1m</td>
-      <td style="color:#4ade80;font-weight:700;font-size:.62rem">BULL</td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td><span style="color:#f87171;font-size:.66rem">▼</span></td>
-      <td><span style="color:#4ade80;font-size:.66rem">▲</span></td>
-      <td style="color:#4ade80;font-weight:700;font-size:.68rem">3/4</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">1m</td>
+      <td style="color:#00c87a;font-weight:700;font-size:.62rem">BULL</td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td><span style="color:#cc3d55;font-size:.66rem">▼</span></td>
+      <td><span style="color:#00c87a;font-size:.66rem">▲</span></td>
+      <td style="color:#00c87a;font-weight:700;font-size:.68rem">3/4</td>
     </tr>
       </table>
       <div style="margin-top:4px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;font-size:.58rem">
-        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">ER <strong style="color:#4ade80">0.76</strong></div>
-        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">ADX <strong style="color:#4ade80">31.2</strong></div>
-        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">RVOL <strong style="color:#4ade80">1.99x</strong></div>
+        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">ER <strong style="color:#00c87a">0.76</strong></div>
+        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">ADX <strong style="color:#00c87a">31.2</strong></div>
+        <div style="padding:2px 4px;background:rgba(0,0,0,.2)">RVOL <strong style="color:#00c87a">1.99x</strong></div>
       </div>
     </div>
     <div class="card">
@@ -466,67 +467,67 @@ tr:last-child td{border-bottom:none}
       <table>
         <tr><th>TIME</th><th>$</th><th></th><th>H</th><th>L</th><th>VOL</th></tr>
         <tr>
-          <td style="color:#4a5568;font-size:.58rem">02:20 PM</td>
-          <td style="color:#f87171;font-weight:700;font-size:.64rem">$669.15</td>
-          <td style="color:#f87171;font-size:.62rem">▼</td>
-          <td style="color:#4a5568;font-size:.58rem">669.74</td>
-          <td style="color:#4a5568;font-size:.58rem">668.96</td>
-          <td style="color:#4ade80;font-size:.56rem">1180K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:20 PM</td>
+          <td style="color:#cc3d55;font-weight:700;font-size:.64rem">$669.15</td>
+          <td style="color:#cc3d55;font-size:.62rem">▼</td>
+          <td style="color:#3a5068;font-size:.58rem">669.74</td>
+          <td style="color:#3a5068;font-size:.58rem">668.96</td>
+          <td style="color:#00a060;font-size:.56rem">1180K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:25 PM</td>
-          <td style="color:#4ade80;font-weight:700;font-size:.64rem">$669.27</td>
-          <td style="color:#4ade80;font-size:.62rem">▲</td>
-          <td style="color:#4a5568;font-size:.58rem">669.51</td>
-          <td style="color:#4a5568;font-size:.58rem">668.69</td>
-          <td style="color:#4ade80;font-size:.56rem">1816K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:25 PM</td>
+          <td style="color:#00c87a;font-weight:700;font-size:.64rem">$669.27</td>
+          <td style="color:#00c87a;font-size:.62rem">▲</td>
+          <td style="color:#3a5068;font-size:.58rem">669.51</td>
+          <td style="color:#3a5068;font-size:.58rem">668.69</td>
+          <td style="color:#00a060;font-size:.56rem">1816K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:30 PM</td>
-          <td style="color:#f87171;font-weight:700;font-size:.64rem">$668.97</td>
-          <td style="color:#f87171;font-size:.62rem">▼</td>
-          <td style="color:#4a5568;font-size:.58rem">669.40</td>
-          <td style="color:#4a5568;font-size:.58rem">668.92</td>
-          <td style="color:#4ade80;font-size:.56rem">1180K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:30 PM</td>
+          <td style="color:#cc3d55;font-weight:700;font-size:.64rem">$668.97</td>
+          <td style="color:#cc3d55;font-size:.62rem">▼</td>
+          <td style="color:#3a5068;font-size:.58rem">669.40</td>
+          <td style="color:#3a5068;font-size:.58rem">668.92</td>
+          <td style="color:#00a060;font-size:.56rem">1180K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:35 PM</td>
-          <td style="color:#f87171;font-weight:700;font-size:.64rem">$668.97</td>
-          <td style="color:#f87171;font-size:.62rem">▼</td>
-          <td style="color:#4a5568;font-size:.58rem">669.43</td>
-          <td style="color:#4a5568;font-size:.58rem">668.80</td>
-          <td style="color:#4ade80;font-size:.56rem">1022K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:35 PM</td>
+          <td style="color:#cc3d55;font-weight:700;font-size:.64rem">$668.97</td>
+          <td style="color:#cc3d55;font-size:.62rem">▼</td>
+          <td style="color:#3a5068;font-size:.58rem">669.43</td>
+          <td style="color:#3a5068;font-size:.58rem">668.80</td>
+          <td style="color:#00a060;font-size:.56rem">1022K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:40 PM</td>
-          <td style="color:#f87171;font-weight:700;font-size:.64rem">$668.60</td>
-          <td style="color:#f87171;font-size:.62rem">▼</td>
-          <td style="color:#4a5568;font-size:.58rem">669.12</td>
-          <td style="color:#4a5568;font-size:.58rem">668.42</td>
-          <td style="color:#4ade80;font-size:.56rem">976K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:40 PM</td>
+          <td style="color:#cc3d55;font-weight:700;font-size:.64rem">$668.60</td>
+          <td style="color:#cc3d55;font-size:.62rem">▼</td>
+          <td style="color:#3a5068;font-size:.58rem">669.12</td>
+          <td style="color:#3a5068;font-size:.58rem">668.42</td>
+          <td style="color:#00a060;font-size:.56rem">976K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:45 PM</td>
-          <td style="color:#4ade80;font-weight:700;font-size:.64rem">$668.76</td>
-          <td style="color:#4ade80;font-size:.62rem">▲</td>
-          <td style="color:#4a5568;font-size:.58rem">668.86</td>
-          <td style="color:#4a5568;font-size:.58rem">668.42</td>
-          <td style="color:#4ade80;font-size:.56rem">1608K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:45 PM</td>
+          <td style="color:#00c87a;font-weight:700;font-size:.64rem">$668.76</td>
+          <td style="color:#00c87a;font-size:.62rem">▲</td>
+          <td style="color:#3a5068;font-size:.58rem">668.86</td>
+          <td style="color:#3a5068;font-size:.58rem">668.42</td>
+          <td style="color:#00a060;font-size:.56rem">1608K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:50 PM</td>
-          <td style="color:#f87171;font-weight:700;font-size:.64rem">$668.65</td>
-          <td style="color:#f87171;font-size:.62rem">▼</td>
-          <td style="color:#4a5568;font-size:.58rem">669.05</td>
-          <td style="color:#4a5568;font-size:.58rem">668.47</td>
-          <td style="color:#4ade80;font-size:.56rem">1993K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:50 PM</td>
+          <td style="color:#cc3d55;font-weight:700;font-size:.64rem">$668.65</td>
+          <td style="color:#cc3d55;font-size:.62rem">▼</td>
+          <td style="color:#3a5068;font-size:.58rem">669.05</td>
+          <td style="color:#3a5068;font-size:.58rem">668.47</td>
+          <td style="color:#00a060;font-size:.56rem">1993K</td>
         </tr><tr>
-          <td style="color:#4a5568;font-size:.58rem">02:55 PM</td>
-          <td style="color:#4ade80;font-weight:700;font-size:.64rem">$668.96</td>
-          <td style="color:#4ade80;font-size:.62rem">▲</td>
-          <td style="color:#4a5568;font-size:.58rem">669.23</td>
-          <td style="color:#4a5568;font-size:.58rem">668.64</td>
-          <td style="color:#4ade80;font-size:.56rem">3719K</td>
+          <td style="color:#3a5068;font-size:.58rem">02:55 PM</td>
+          <td style="color:#00c87a;font-weight:700;font-size:.64rem">$668.96</td>
+          <td style="color:#00c87a;font-size:.62rem">▲</td>
+          <td style="color:#3a5068;font-size:.58rem">669.23</td>
+          <td style="color:#3a5068;font-size:.58rem">668.64</td>
+          <td style="color:#00a060;font-size:.56rem">3719K</td>
         </tr>
       </table>
       <div style="margin-top:4px;border-top:1px solid var(--bd);padding-top:4px">
         <div style="font-size:.54rem;color:var(--muted);margin-bottom:2px">52W (87th pct)</div>
         <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted);margin-bottom:2px"><span>$482</span><span style="color:var(--white)">$669.03</span><span>$698</span></div>
-        <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:87%;background:var(--blue);border-radius:2px"></div></div>
+        <div style="height:3px;background:rgba(255,255,255,.04);border-radius:2px"><div style="height:100%;width:87%;background:var(--blue);border-radius:2px"></div></div>
       </div>
     </div>
     <div class="card">
@@ -546,6 +547,6 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <div style="text-align:center;padding:5px;font-size:.54rem;color:var(--muted);border-top:1px solid var(--bd)">
-  SPY OCC · KAMA PF7.15 · Ichimoku+RSI+MACD+VWAP · @EliteOptions2 · ⚠️ Educational only · Updated <strong style="color:var(--text)">2026-03-16 18:16 CT</strong>
+  SPY OCC · KAMA PF7.15 · Ichimoku+RSI+MACD+VWAP · @EliteOptions2 · ⚠️ Educational only · Updated <strong style="color:var(--text)">2026-03-16 18:56 CT</strong>
 </div>
 </body></html>
