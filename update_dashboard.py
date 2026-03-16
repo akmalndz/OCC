@@ -32,15 +32,15 @@ LEVELS = [
     (638.6,  "MO", "Monthly Floor",            True ),
 ]
 
-TF_COLOR = {"MO": "#fbbf24", "WK": "#a78bfa", "DY": "#60a5fa"}
+TF_COLOR = {"MO": "#a07a08", "WK": "#6040b0", "DY": "#3060a0"}
 
 # ─── SESSIONS (CT) ─────────────────────────────────────────────────────────────
 SESSIONS = [
-    {"name": "PRE-MKT",    "start": (8, 0),  "end": (9, 15), "color": "#4a5568", "trade": False, "advice": "Bias formation only. No entries."},
-    {"name": "FAKE-OUT",   "start": (9, 15), "end": (9, 45), "color": "#f87171", "trade": False, "advice": "ORB forming. FAKE-OUT ZONE — wait."},
-    {"name": "ORB WINDOW", "start": (9, 45), "end": (10, 30),"color": "#4ade80", "trade": True,  "advice": "PRIMARY WINDOW. KAMA cross + Ichimoku confirm."},
-    {"name": "HARD CUTOFF","start": (10, 30),"end": (10, 31),"color": "#f87171", "trade": False, "advice": "10:30 HARD EXIT. Close all positions NOW."},
-    {"name": "DEAD ZONE",  "start": (10, 31),"end": (23, 59),"color": "#4a5568", "trade": False, "advice": "No new entries after 10:30 CT."},
+    {"name": "PRE-MKT",    "start": (8, 0),  "end": (9, 15), "color": "#3a5068", "trade": False, "advice": "Bias formation only. No entries."},
+    {"name": "FAKE-OUT",   "start": (9, 15), "end": (9, 45), "color": "#8a3040", "trade": False, "advice": "ORB forming. FAKE-OUT ZONE — wait."},
+    {"name": "ORB WINDOW", "start": (9, 45), "end": (10, 30),"color": "#00a060", "trade": True,  "advice": "PRIMARY WINDOW. KAMA cross + Ichimoku confirm."},
+    {"name": "HARD CUTOFF","start": (10, 30),"end": (10, 31),"color": "#8a3040", "trade": False, "advice": "10:30 HARD EXIT. Close all positions NOW."},
+    {"name": "DEAD ZONE",  "start": (10, 31),"end": (23, 59),"color": "#3a5068", "trade": False, "advice": "No new entries after 10:30 CT."},
 ]
 
 def get_session(ct_now):
@@ -225,7 +225,7 @@ def tf_row(hist, label):
     bR = rn > 50; bM = mn > 0; bVol = vr >= 1.0
     score = sum([bK, bR, bM, bV_vwap])
     bias = "BULL" if score >= 3 else ("BEAR" if score <= 1 else "NEUTRAL")
-    bc = "#4ade80" if bias == "BULL" else ("#f87171" if bias == "BEAR" else "#fbbf24")
+    bc = "#00c87a" if bias == "BULL" else ("#cc3d55" if bias == "BEAR" else "#c8960a")
     return {"label": label, "price": round(price, 2), "kama": kn, "rsi": rn, "macd_h": mn,
             "vol_ratio": vr, "bK": bK, "bR": bR, "bM": bM, "bVwap": bV_vwap, "bVol": bVol,
             "score": score, "bias": bias, "bias_color": bc, "er": er_v}
@@ -469,46 +469,46 @@ def get_verdict(al, d, session, opts):
         return f"${opt['strike']:.0f}{cp[0]} {exp} ({dte}d) ~${e:.2f} | Stop ${st} | Tgt ${tg} | Δ{opt['delta']}"
 
     if not session["trade"]:
-        return {"verdict": f"⏸ {session['name']} — NO NEW TRADES", "color": "#4a5568",
-                "bias": "WAIT", "bias_color": "#fbbf24", "explanation": session["advice"],
+        return {"verdict": f"⏸ {session['name']} — NO NEW TRADES", "color": "#3a5068",
+                "bias": "WAIT", "bias_color": "#c8960a", "explanation": session["advice"],
                 "trade_idea": "Next window: ORB 9:45–10:30 AM CT.", "gate_pass": gate_pass}
 
     cv = "MAX" if cc >= 5 else ("HIGH" if cc >= 4 else "GOOD")
     pv = "MAX" if pc >= 5 else ("HIGH" if pc >= 4 else "GOOD")
 
     if cc >= 4:
-        return {"verdict": f"✅ CALL — {cv} ({cc}/{ms})", "color": "#4ade80",
-                "bias": "STRONG BULL", "bias_color": "#4ade80",
+        return {"verdict": f"✅ CALL — {cv} ({cc}/{ms})", "color": "#00c87a",
+                "bias": "STRONG BULL", "bias_color": "#00c87a",
                 "explanation": f"{cc}/{ms} signals. {gate_pass}/8 gates. 2 DTE | Target +80% | Stop –35%",
                 "trade_idea": idea(best_c, "CALL"), "gate_pass": gate_pass}
     elif cc == 3:
-        return {"verdict": f"🟢 CALL — GOOD ({cc}/{ms})", "color": "#86efac",
-                "bias": "BULLISH", "bias_color": "#4ade80",
+        return {"verdict": f"🟢 CALL — GOOD ({cc}/{ms})", "color": "#008c58",
+                "bias": "BULLISH", "bias_color": "#00c87a",
                 "explanation": f"3/{ms} signals. Confirm KAMA 5m + Ichimoku green. 2 DTE.",
                 "trade_idea": idea(best_c, "CALL"), "gate_pass": gate_pass}
     elif pc >= 4:
-        return {"verdict": f"🔴 PUT — {pv} ({pc}/{ms})", "color": "#f87171",
-                "bias": "STRONG BEAR", "bias_color": "#f87171",
+        return {"verdict": f"🔴 PUT — {pv} ({pc}/{ms})", "color": "#cc3d55",
+                "bias": "STRONG BEAR", "bias_color": "#cc3d55",
                 "explanation": f"{pc}/{ms} signals. {gate_pass}/8 gates. 2 DTE | Target +80% | Stop –35%",
                 "trade_idea": idea(best_p, "PUT"), "gate_pass": gate_pass}
     elif pc == 3:
-        return {"verdict": f"🟠 PUT — GOOD ({pc}/{ms})", "color": "#fb923c",
-                "bias": "BEARISH", "bias_color": "#f87171",
+        return {"verdict": f"🟠 PUT — GOOD ({pc}/{ms})", "color": "#8a3040",
+                "bias": "BEARISH", "bias_color": "#cc3d55",
                 "explanation": f"3/{ms} signals. Volume must confirm — no dead cat bounce.",
                 "trade_idea": idea(best_p, "PUT"), "gate_pass": gate_pass}
     elif cc == 2 and cc > pc:
-        return {"verdict": f"⏸ CALL WATCH ({cc}/{ms})", "color": "#fbbf24",
-                "bias": "DEVELOPING", "bias_color": "#fbbf24",
+        return {"verdict": f"⏸ CALL WATCH ({cc}/{ms})", "color": "#c8960a",
+                "bias": "DEVELOPING", "bias_color": "#c8960a",
                 "explanation": "2 bull signals. Need 3+. Wait for KAMA cross confirmation.",
                 "trade_idea": idea(best_c, "CALL"), "gate_pass": gate_pass}
     elif pc == 2 and pc > cc:
-        return {"verdict": f"⏸ PUT WATCH ({pc}/{ms})", "color": "#fbbf24",
-                "bias": "DEVELOPING", "bias_color": "#fbbf24",
+        return {"verdict": f"⏸ PUT WATCH ({pc}/{ms})", "color": "#c8960a",
+                "bias": "DEVELOPING", "bias_color": "#c8960a",
                 "explanation": "2 bear signals. Need 3+. Confirm volume on break.",
                 "trade_idea": idea(best_p, "PUT"), "gate_pass": gate_pass}
     else:
-        return {"verdict": f"⏸ FLAT — NO SIGNAL ({max(cc,pc)}/{ms})", "color": "#4a5568",
-                "bias": "FLAT", "bias_color": "#4a5568",
+        return {"verdict": f"⏸ FLAT — NO SIGNAL ({max(cc,pc)}/{ms})", "color": "#3a5068",
+                "bias": "FLAT", "bias_color": "#3a5068",
                 "explanation": "Signals mixed or absent. No trade = valid position.",
                 "trade_idea": "No signal IS a signal. Sit on hands.", "gate_pass": gate_pass}
 
@@ -519,61 +519,63 @@ def h(color, txt, size=None, bold=False, extra=""):
     return f'<span style="color:{color};{s_size}{s_bold}{extra}">{txt}</span>'
 
 def sig_pill(sig, label, pf=""):
-    sc = "#4ade80" if sig.get("bull") else ("#f87171" if sig.get("bear") else "#4a5568")
+    sc = "#00c87a" if sig.get("bull") else ("#cc3d55" if sig.get("bear") else "#3a5068")
     r,g,b = int(sc[1:3],16),int(sc[3:5],16),int(sc[5:7],16)
     icon = "✅" if (sig.get("bull") or sig.get("bear")) else "⏸"
-    return f'''<div style="background:rgba({r},{g},{b},.07);border:1px solid rgba({r},{g},{b},.3);padding:5px 7px;margin-bottom:4px">
+    return f'''<div style="background:rgba({r},{g},{b},.06);border:1px solid rgba({r},{g},{b},.25);padding:5px 7px;margin-bottom:4px">
       <div style="display:flex;justify-content:space-between;margin-bottom:1px">
         <span style="font-size:.56rem;color:{sc};font-weight:700">{label}</span>
-        <span style="font-size:.5rem;color:#4a5568;background:rgba(255,255,255,.04);padding:1px 4px">{pf}</span>
+        <span style="font-size:.5rem;color:#3a5068;background:rgba(255,255,255,.03);padding:1px 4px">{pf}</span>
       </div>
-      <div style="font-size:.62rem;color:#8892a4">{icon} {sig.get("label","—")}</div>
-      <div style="font-size:.58rem;color:#4a5568;margin-top:1px">{sig.get("detail","")}</div>
+      <div style="font-size:.62rem;color:#7090a8">{icon} {sig.get("label","—")}</div>
+      <div style="font-size:.58rem;color:#3a5068;margin-top:1px">{sig.get("detail","")}</div>
     </div>'''
 
 def chain_table(rows, is_call, price):
-    if not rows: return '<tr><td colspan="6" style="color:#4a5568">No data</td></tr>'
+    if not rows: return '<tr><td colspan="6" style="color:#3a5068">No data</td></tr>'
     out = ""
     for r in rows[:6]:
         atm = abs(r["strike"] - price) < 0.6
-        kc  = "#4ade80" if is_call else "#f87171"
-        itm_s = f"font-weight:700;" if r.get("itm") else ""
-        atm_s = f"background:rgba(251,191,36,.07);" if atm else ""
-        vol_c = "#4ade80" if r["vol"] > 1000 else ("#fbbf24" if r["vol"] > 200 else "#4a5568")
-        oi_c  = "#4ade80" if r["oi"] > 5000  else ("#fbbf24" if r["oi"] > 1000 else "#4a5568")
-        spr_c = "#4ade80" if r["spread"] < 0.08 else ("#fbbf24" if r["spread"] < 0.20 else "#f87171")
-        atm_badge = ' <span style="color:#fbbf24;font-size:.5rem">ATM</span>' if atm else ""
+        kc  = "#00c87a" if is_call else "#cc3d55"
+        itm_s = "font-weight:700;" if r.get("itm") else ""
+        atm_s = "background:rgba(200,150,10,.06);" if atm else ""
+        vol_c = "#00c87a" if r["vol"] > 1000 else ("#c8960a" if r["vol"] > 200 else "#3a5068")
+        oi_c  = "#00c87a" if r["oi"] > 5000  else ("#c8960a" if r["oi"] > 1000 else "#3a5068")
+        spr_c = "#00c87a" if r["spread"] < 0.08 else ("#c8960a" if r["spread"] < 0.20 else "#cc3d55")
+        atm_badge = ' <span style="color:#c8960a;font-size:.5rem">ATM</span>' if atm else ""
         out += f'''<tr style="{atm_s}">
           <td style="color:{kc};{itm_s}">${r["strike"]:.0f}{atm_badge}</td>
-          <td style="color:#dde3ef;font-weight:600">${r["mid"]:.2f}</td>
+          <td style="color:#c8d8e8;font-weight:600">${r["mid"]:.2f}</td>
           <td style="color:{spr_c};">${r["spread"]:.2f}</td>
           <td style="color:{vol_c}">{r["vol"]:,}</td>
           <td style="color:{oi_c}">{r["oi"]:,}</td>
-          <td style="color:#60a5fa">Δ{r["delta"]:.2f}</td>
+          <td style="color:#3a7abf">Δ{r["delta"]:.2f}</td>
         </tr>'''
     return out
 
 def news_html(articles):
-    if not articles: return '<div style="font-size:.63rem;color:#4a5568">No articles.</div>'
+    if not articles: return '<div style="font-size:.63rem;color:#3a5068">No articles.</div>'
     out = ""
     for a in articles:
-        src_c = "#f87171" if a["src"] in ("FED","VIX") else "#fbbf24" if a["src"] == "ECON" else "#60a5fa"
-        out += f'''<div style="padding:5px 7px;border-left:2px solid {src_c}44;background:rgba(255,255,255,.015);margin-bottom:4px">
+        src_c = "#cc3d55" if a["src"] in ("FED","VIX") else "#c8960a" if a["src"] == "ECON" else "#3a7abf"
+        out += f'''<div style="padding:5px 7px;border-left:2px solid {src_c}44;background:rgba(255,255,255,.012);margin-bottom:4px">
           <div style="display:flex;gap:5px;align-items:center;margin-bottom:2px">
-            <span style="font-size:.54rem;color:#4a5568">{a["time"]}</span>
+            <span style="font-size:.54rem;color:#3a5068">{a["time"]}</span>
             <span style="font-size:.52rem;color:{src_c};background:{src_c}14;padding:1px 4px;font-weight:600">{a["src"]}</span>
           </div>
-          <div style="font-size:.62rem;color:#8892a4;line-height:1.45">{a["title"]}</div>
+          <div style="font-size:.62rem;color:#7090a8;line-height:1.45">{a["title"]}</div>
         </div>'''
     return out
 
 def mtf_row_html(r):
     if not r: return ""
-    sc = r["bias_color"]
-    ok = lambda b: f'<span style="color:{"#4ade80" if b else "#f87171"};font-size:.66rem">{"▲" if b else "▼"}</span>'
-    score_c = "#4ade80" if r["score"]>=3 else ("#fbbf24" if r["score"]==2 else "#f87171")
+    # remap bias_color to muted palette
+    bc_map = {"#4ade80":"#00c87a","#f87171":"#cc3d55","#fbbf24":"#c8960a","#4a5568":"#3a5068"}
+    sc = bc_map.get(r["bias_color"], r["bias_color"])
+    ok = lambda b: f'<span style="color:{"#00c87a" if b else "#cc3d55"};font-size:.66rem">{"▲" if b else "▼"}</span>'
+    score_c = "#00c87a" if r["score"]>=3 else ("#c8960a" if r["score"]==2 else "#cc3d55")
     return f'''<tr>
-      <td style="color:#dde3ef;font-weight:600;font-size:.62rem">{r["label"]}</td>
+      <td style="color:#c8d8e8;font-weight:600;font-size:.62rem">{r["label"]}</td>
       <td style="color:{sc};font-weight:700;font-size:.62rem">{r["bias"]}</td>
       <td>{ok(r["bK"])}</td>
       <td>{ok(r["bR"])}</td>
@@ -587,17 +589,31 @@ def mtf_row_html(r):
 def render(d, opts, news_items, al, verdict, session, ct_now):
     price   = d["price"]
     chg     = d["change"]; chgp = d["change_pct"]
-    cc_     = "#4ade80" if chg >= 0 else "#f87171"
+    # ── muted palette (office-safe, matches NVDA OCC screenshot) ──────────────
+    G  = "#00c87a"   # dim green  (was #4ade80)
+    R  = "#cc3d55"   # dim red    (was #f87171)
+    Y  = "#c8960a"   # dim amber  (was #fbbf24)
+    BL = "#3a7abf"   # dim blue   (was #60a5fa)
+    OR = "#b86030"   # dim orange (was #fb923c)
+    # rewrite verdict colors to muted equivalents
+    def _dim(c):
+        MAP = {"#4ade80":G,"#86efac":"#4a8c64","#f87171":R,"#fb923c":OR,
+               "#fbbf24":Y,"#4a5568":"#333d4f","#60a5fa":BL}
+        return MAP.get(c, c)
+    v = dict(verdict)
+    v["color"]      = _dim(v["color"])
+    v["bias_color"] = _dim(v["bias_color"])
+
+    cc_     = G if chg >= 0 else R
     arrow   = "▲" if chg >= 0 else "▼"
     ds      = ct_now.strftime("%b %d")
     ts      = ct_now.strftime("%I:%M %p CT")
-    v       = verdict
-    vc      = "#4ade80" if d["vol_ratio"] > 1.2 else ("#fbbf24" if d["vol_ratio"] > 0.8 else "#f87171")
+    vc      = G if d["vol_ratio"] > 1.2 else (Y if d["vol_ratio"] > 0.8 else R)
     yr      = min(100, (price - d["week52l"]) / (d["week52h"] - d["week52l"]) * 100) if d["week52h"] != d["week52l"] else 50
-    adx_c   = "#4ade80" if d["adx"] >= 25 else ("#fbbf24" if d["adx"] >= 20 else "#f87171")
-    rvol_c  = "#4ade80" if d["rvol"] >= 1.2 else ("#fbbf24" if d["rvol"] >= 0.8 else "#f87171")
+    adx_c   = G if d["adx"] >= 25 else (Y if d["adx"] >= 20 else R)
+    rvol_c  = G if d["rvol"] >= 1.2 else (Y if d["rvol"] >= 0.8 else R)
     er_val  = d["sig_kama"].get("er", 0.5)
-    er_c    = "#4ade80" if er_val > 0.6 else ("#fbbf24" if er_val > 0.35 else "#f87171")
+    er_c    = G if er_val > 0.6 else (Y if er_val > 0.35 else R)
 
     # Nearest level
     above_lvl = next((l for l in LEVELS if l[0] > price), None)
@@ -609,9 +625,9 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
         t = ct_now.hour * 60 + ct_now.minute
         act = s["start"][0]*60+s["start"][1] <= t < s["end"][0]*60+s["end"][1]
         bg  = f"background:{s['color']}20;border:1px solid {s['color']}99;" if act else "background:rgba(255,255,255,.018);border:1px solid #1c2030;"
-        nc  = s["color"] if act else "#4a5568"
+        nc  = s["color"] if act else "#3a5068"
         ndot= f'<div style="font-size:.5rem;color:{s["color"]}">●NOW</div>' if act else ""
-        tl += f'<div style="{bg}padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#4a5568">{s["start"][0]:02d}:{s["start"][1]:02d} CT</div><div style="font-size:.6rem;font-weight:700;color:{nc};white-space:nowrap">{s["name"]}</div>{ndot}</div>'
+        tl += f'<div style="{bg}padding:3px 6px;text-align:center"><div style="font-size:.54rem;color:#3a5068">{s["start"][0]:02d}:{s["start"][1]:02d} CT</div><div style="font-size:.6rem;font-weight:700;color:{nc};white-space:nowrap">{s["name"]}</div>{ndot}</div>'
 
     # MTF table rows
     mtf_html = ""
@@ -622,10 +638,10 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
     # Gates
     gates = al["gates"]
     def gate_chip(name, passed):
-        c = "#4ade80" if passed else "#f87171"
-        bg = "rgba(74,222,128,.07)" if passed else "rgba(248,113,113,.05)"
+        c = "#00c87a" if passed else "#cc3d55"
+        bg = "rgba(0,200,122,.06)" if passed else "rgba(204,61,85,.04)"
         icon = "✓" if passed else "✗"
-        return f'<div style="background:{bg};border:1px solid {c}33;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:{c};font-size:.7rem">{icon}</span><span style="font-size:.56rem;color:#8892a4">{name}</span></div>'
+        return f'<div style="background:{bg};border:1px solid {c}2a;padding:2px 5px;display:flex;align-items:center;gap:3px"><span style="color:{c};font-size:.7rem">{icon}</span><span style="font-size:.56rem;color:#7090a8">{name}</span></div>'
 
     gates_html = "".join(gate_chip(k, v) for k, v in gates.items())
     gate_pass = sum(1 for v in gates.values() if v)
@@ -634,22 +650,22 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
     def reasons_list(reasons):
         out = ""
         for r in reasons:
-            c = "#4ade80" if r.startswith("✅") else "#f87171"
+            c = "#00c87a" if r.startswith("✅") else "#cc3d55"
             out += f'<div style="font-size:.58rem;color:{c};line-height:1.5;padding:1px 0">{r}</div>'
         return out
 
     # Candle rows
     candle_rows = ""
     for cn in d["candles"]:
-        cc2 = "#4ade80" if cn["bull"] else "#f87171"
+        cc2 = "#00c87a" if cn["bull"] else "#cc3d55"
         vv = cn["vol"] / 1000
         candle_rows += f'''<tr>
-          <td style="color:#4a5568;font-size:.58rem">{cn["time"]}</td>
+          <td style="color:#3a5068;font-size:.58rem">{cn["time"]}</td>
           <td style="color:{cc2};font-weight:700;font-size:.64rem">${cn["close"]:.2f}</td>
           <td style="color:{cc2};font-size:.62rem">{"▲" if cn["bull"] else "▼"}</td>
-          <td style="color:#4a5568;font-size:.58rem">{cn["high"]:.2f}</td>
-          <td style="color:#4a5568;font-size:.58rem">{cn["low"]:.2f}</td>
-          <td style="color:#4ade80;font-size:.56rem">{vv:.0f}K</td>
+          <td style="color:#3a5068;font-size:.58rem">{cn["high"]:.2f}</td>
+          <td style="color:#3a5068;font-size:.58rem">{cn["low"]:.2f}</td>
+          <td style="color:#00a060;font-size:.56rem">{vv:.0f}K</td>
         </tr>'''
 
     # Level rows
@@ -657,15 +673,17 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
     for (spy_p, tf, lbl, star) in LEVELS:
         dist = price - spy_p
         near = abs(dist) < 2.0
-        tc   = TF_COLOR.get(tf, "#4a5568")
+        tc   = TF_COLOR.get(tf, "#3a5068")
+        # mute TF_COLOR values too
+        tc   = {"#fbbf24":"#a07a08","#a78bfa":"#6040b0","#60a5fa":"#3060a0"}.get(tc, tc)
         star_s = "★ " if star else ""
         bg_s = f"background:{tc}08;" if near else ""
-        bl_s = f"border-left:2px solid {tc};" if near else "border-left:2px solid #1c2030;"
-        dc   = "#4ade80" if dist > 0 else "#f87171"
+        bl_s = f"border-left:2px solid {tc};" if near else "border-left:2px solid #192336;"
+        dc   = "#00c87a" if dist > 0 else "#cc3d55"
         level_rows += f'''<tr style="{bg_s}{bl_s}">
-          <td style="color:{'#dde3ef' if near else '#4a5568'};font-size:.6rem">{star_s}{lbl}</td>
-          <td style="color:{'#dde3ef' if near else '#4a5568'};font-size:.6rem">{tf}</td>
-          <td style="color:{tc if near else '#8892a4'};font-weight:{'700' if near else '400'};font-size:.64rem">${spy_p:.2f}</td>
+          <td style="color:{'#c8d8e8' if near else '#3a5068'};font-size:.6rem">{star_s}{lbl}</td>
+          <td style="color:{'#c8d8e8' if near else '#3a5068'};font-size:.6rem">{tf}</td>
+          <td style="color:{tc if near else '#7090a8'};font-weight:{'700' if near else '400'};font-size:.64rem">${spy_p:.2f}</td>
           <td style="color:{dc};font-size:.58rem">{dist:+.2f}</td>
         </tr>'''
 
@@ -673,7 +691,7 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
     on_level = min(LEVELS, key=lambda x: abs(x[0] - price))
     alert_html = ""
     if abs(on_level[0] - price) <= 2.0:
-        alert_html = f'<div style="background:rgba(251,191,36,.1);border:1px solid #fbbf24;padding:5px 14px;font-size:.68rem;color:#fbbf24;font-weight:700;text-align:center">⚡ ON LEVEL: ${on_level[0]:.2f} — {on_level[2].upper()} ({on_level[1]})</div>'
+        alert_html = f'<div style="background:rgba(200,150,10,.08);border:1px solid #a07a0866;padding:5px 14px;font-size:.68rem;color:#c8960a;font-weight:700;text-align:center">⚡ ON LEVEL: ${on_level[0]:.2f} — {on_level[2].upper()} ({on_level[1]})</div>'
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -682,15 +700,16 @@ def render(d, opts, news_items, al, verdict, session, ct_now):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="refresh" content="1800">
 <title>SPY · OCC</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{{--bg:#0f1117;--s1:#13161f;--s2:#0f1420;--bd:#1c2030;
-  --green:#4ade80;--green-dim:#22c55e;--red:#f87171;--yellow:#fbbf24;
-  --orange:#fb923c;--blue:#60a5fa;--purple:#a78bfa;--white:#dde3ef;--muted:#4a5568;--text:#8892a4;}}
+:root{{--bg:#06090f;--s1:#0b1018;--s2:#0d1422;--bd:#192336;
+  --green:#00c87a;--green-dim:#00a060;--red:#cc3d55;--yellow:#c8960a;
+  --orange:#b86030;--blue:#3a7abf;--purple:#7c4dff;--white:#c8d8e8;--muted:#3a5068;--text:#7090a8;}}
 *{{margin:0;padding:0;box-sizing:border-box}}
-body{{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;overflow-x:hidden}}
+body{{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;
+  background-image:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(0,40,100,.06) 0%,transparent 65%)}}
 .hdr{{border-bottom:1px solid var(--bd);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(15,17,23,.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}}
+  background:rgba(6,9,15,.98);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:5px}}
 .main{{max-width:1440px;margin:0 auto;padding:6px 8px;display:flex;flex-direction:column;gap:5px}}
 .g4{{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;align-items:start}}
 .g3{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;align-items:start}}
@@ -699,7 +718,7 @@ body{{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospa
   border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:3px}}
 .ct::before{{content:'';width:3px;height:3px;background:var(--blue);display:block;border-radius:50%;flex-shrink:0}}
 table{{width:100%;border-collapse:collapse;table-layout:fixed}}
-th,td{{padding:3px 3px;font-size:.62rem;border-bottom:1px solid rgba(28,32,48,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+th,td{{padding:3px 3px;font-size:.62rem;border-bottom:1px solid rgba(25,35,54,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 th{{color:var(--muted);font-size:.54rem;letter-spacing:.5px;text-align:left}}
 tr:last-child td{{border-bottom:none}}
 @keyframes pulse{{0%,100%{{opacity:1}}50%{{opacity:.3}}}}
@@ -716,12 +735,12 @@ tr:last-child td{{border-bottom:none}}
     <span style="font-size:1.1rem;color:{cc_};font-weight:700">${price:.2f}</span>
     <span style="font-size:.78rem;color:{cc_}">{arrow} {abs(chg):.2f} ({abs(chgp):.2f}%)</span>
     <span style="font-size:.58rem;color:var(--muted)">ATR${d['atr']:.2f}·52W${d['week52l']:.0f}–${d['week52h']:.0f}</span>
-    <span style="font-size:.55rem;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:#60a5fa;padding:2px 6px;font-weight:700">OCC v1</span>
+    <span style="font-size:.55rem;background:rgba(58,122,191,.08);border:1px solid rgba(58,122,191,.25);color:#3a7abf;padding:2px 6px;font-weight:700">OCC v1</span>
   </div>
   <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
     <span style="font-size:.66rem;color:{v['bias_color']};font-weight:700">{v['bias']}</span>
     <span style="font-size:.64rem;color:var(--yellow)"><span class="dot" style="background:var(--yellow);margin-right:2px"></span>{session['name']}</span>
-    <span style="font-size:.62rem;color:#4a5568">{ds}·{ts}</span>
+    <span style="font-size:.62rem;color:#3a5068">{ds}·{ts}</span>
   </div>
 </header>
 
@@ -733,7 +752,7 @@ tr:last-child td{{border-bottom:none}}
 
 <!-- VERDICT + SIGNAL GATES -->
 <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:5px">
-  <div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid {v['color']};background:linear-gradient(135deg,rgba(19,22,31,.97),rgba(15,20,32,.97))">
+  <div style="padding:9px 13px;border:1px solid var(--bd);border-left:4px solid {v['color']};background:linear-gradient(135deg,rgba(11,16,24,.98),rgba(13,20,34,.98))">
     <div style="font-size:.53rem;color:var(--muted);letter-spacing:1px;margin-bottom:2px">SIGNAL · {ts}</div>
     <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:{v['color']};line-height:1.2">{v['verdict']}</div>
     <div style="font-size:.66rem;color:var(--text);margin-top:3px;line-height:1.45">{v['explanation']}</div>
@@ -775,13 +794,13 @@ tr:last-child td{{border-bottom:none}}
     <div class="card">
       <div class="ct">Signal Breakdown</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:5px">
-        <div style="border:1px solid #4ade8044;padding:4px 7px;text-align:center">
+        <div style="border:1px solid #00c87a2a;padding:4px 7px;text-align:center">
           <div style="font-size:.5rem;color:var(--muted)">CALL</div>
-          <div style="font-size:1.1rem;color:#4ade80;font-weight:700">{al['call_count']}/{al['max_signals']}</div>
+          <div style="font-size:1.1rem;color:#00c87a;font-weight:700">{al['call_count']}/{al['max_signals']}</div>
         </div>
-        <div style="border:1px solid #f8717144;padding:4px 7px;text-align:center">
+        <div style="border:1px solid #cc3d552a;padding:4px 7px;text-align:center">
           <div style="font-size:.5rem;color:var(--muted)">PUT</div>
-          <div style="font-size:1.1rem;color:#f87171;font-weight:700">{al['put_count']}/{al['max_signals']}</div>
+          <div style="font-size:1.1rem;color:#cc3d55;font-weight:700">{al['put_count']}/{al['max_signals']}</div>
         </div>
       </div>
       <div style="font-size:.58rem;color:var(--muted);letter-spacing:1px;margin-bottom:3px">CALL REASONS</div>
@@ -796,14 +815,14 @@ tr:last-child td{{border-bottom:none}}
     <div class="card">
       <div class="ct">S/R Levels · @EliteOptions2</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:5px">
-        <div style="padding:4px 6px;background:rgba(74,222,128,.05);border:1px solid #4ade8033">
+        <div style="padding:4px 6px;background:rgba(0,200,122,.04);border:1px solid #00c87a22">
           <div style="font-size:.52rem;color:var(--muted)">SUPPORT ↓</div>
-          <div style="font-size:.78rem;color:#4ade80;font-weight:700">${below_lvl[0]:.2f}</div>
+          <div style="font-size:.78rem;color:#00c87a;font-weight:700">${below_lvl[0]:.2f}</div>
           <div style="font-size:.54rem;color:var(--muted)">{below_lvl[2] if below_lvl else "—"}</div>
         </div>
-        <div style="padding:4px 6px;background:rgba(248,113,113,.05);border:1px solid #f8717133">
+        <div style="padding:4px 6px;background:rgba(204,61,85,.04);border:1px solid #cc3d5522">
           <div style="font-size:.52rem;color:var(--muted)">RESIST ↑</div>
-          <div style="font-size:.78rem;color:#f87171;font-weight:700">${above_lvl[0]:.2f}</div>
+          <div style="font-size:.78rem;color:#cc3d55;font-weight:700">${above_lvl[0]:.2f}</div>
           <div style="font-size:.54rem;color:var(--muted)">{above_lvl[2] if above_lvl else "—"}</div>
         </div>
       </div>
@@ -815,27 +834,27 @@ tr:last-child td{{border-bottom:none}}
     <div class="card">
       <div class="ct">Regime</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:.6rem">
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">200-Day MA</div>
-          <div style="color:{'#4ade80' if d['above_e200'] else '#f87171'};font-weight:700">${d['e200_d']:.2f} {'✓' if d['above_e200'] else '✗'}</div>
+          <div style="color:{'#00c87a' if d['above_e200'] else '#cc3d55'};font-weight:700">${d['e200_d']:.2f} {'✓' if d['above_e200'] else '✗'}</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">50-Day MA</div>
-          <div style="color:{'#4ade80' if d['above_e50'] else '#f87171'};font-weight:700">${d['e50_d']:.2f} {'✓' if d['above_e50'] else '✗'}</div>
+          <div style="color:{'#00c87a' if d['above_e50'] else '#cc3d55'};font-weight:700">${d['e50_d']:.2f} {'✓' if d['above_e50'] else '✗'}</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ADX (5m)</div>
           <div style="color:{adx_c};font-weight:700">{d['adx']} {'Strong' if d['adx']>=25 else 'Weak'}</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">RVOL</div>
           <div style="color:{rvol_c};font-weight:700">{d['rvol']}x {'✓' if d['rvol']>=1.0 else '↓'}</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ER (Kaufman)</div>
           <div style="color:{er_c};font-weight:700">{er_val:.3f} {'Trend' if er_val>0.6 else ('Transit' if er_val>0.35 else 'Chop')}</div>
         </div>
-        <div class="card" style="padding:4px 6px;border-color:#1c2030">
+        <div class="card" style="padding:4px 6px;border-color:#192336">
           <div style="color:var(--muted);font-size:.52rem">ATR (daily)</div>
           <div style="color:var(--orange);font-weight:700">${d['atr']:.2f}</div>
         </div>
@@ -889,7 +908,7 @@ tr:last-child td{{border-bottom:none}}
       <div style="margin-top:4px;border-top:1px solid var(--bd);padding-top:4px">
         <div style="font-size:.54rem;color:var(--muted);margin-bottom:2px">52W ({yr:.0f}th pct)</div>
         <div style="display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted);margin-bottom:2px"><span>${d['week52l']:.0f}</span><span style="color:var(--white)">${price:.2f}</span><span>${d['week52h']:.0f}</span></div>
-        <div style="height:3px;background:rgba(255,255,255,.05);border-radius:2px"><div style="height:100%;width:{yr:.0f}%;background:var(--blue);border-radius:2px"></div></div>
+        <div style="height:3px;background:rgba(255,255,255,.04);border-radius:2px"><div style="height:100%;width:{yr:.0f}%;background:var(--blue);border-radius:2px"></div></div>
       </div>
     </div>
     <div class="card">
